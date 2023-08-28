@@ -26,8 +26,28 @@ async def timeout_message(chat_id):
 async def timeoutz_message(chat_id):
     await asyncio.sleep(500)
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
-    
-@app.on_message(filters.regex("/start appeal") & filters.private)
+@app.on_message(filters.command('start'))
+def start(bot, update):
+    user_id = update.from_user.id
+    user_states[user_id] = 'waiting_name'
+    bot.send_message(user_id, "Hi! Please send me your name.")
+
+# Define a function to handle user messages
+@app.on_message(filters.text)
+def handle_message(bot, update):
+    user_id = update.from_user.id
+    if user_id in user_states:
+        state = user_states[user_id]
+
+        if state == 'waiting_name':
+            bot.send_message(user_id, "You got a good name.")
+            user_states[user_id] = 'waiting_dob'
+            bot.send_message(user_id, "Now, please send me your date of birth (DOB).")
+
+        elif state == 'waiting_dob':
+            bot.send_message(user_id, "Good!")
+ 
+@app.on_message(filters.regex("fd") & filters.private)
 async def handle_message(client, message):
     user=message.from_user
     user=user.id
