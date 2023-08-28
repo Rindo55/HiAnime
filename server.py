@@ -59,7 +59,7 @@ def handle_message(bot, update):
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
     combined_message = "\n".join(user_messages[user_id])  # Combine user messages
-    ch_id=1582654217
+    ch_id=-1001582654217
     app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
 
 # Define a function to handle the completion of the conversation
