@@ -31,7 +31,6 @@ async def timeoutz_message(chat_id):
 async def handle_message(client, message):
     user=message.from_user
     user=user.id
-    username=user.username
     asyncio.ensure_future(timeout_message(message.chat.id))
     profile = app.send_message(message.chat.id, text="**State your profile link.**")
     @app.on_message(filters.private & filters.text)
