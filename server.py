@@ -49,7 +49,7 @@ async def handle_message(bot, update):
             user_states[user_id] = 'waiting_dob'
         
         elif state == 'waiting_dob':
-            app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
+            await app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
             user_states[user_id] = 'waiting_tup'
         
         elif state == 'waiting_tup':
