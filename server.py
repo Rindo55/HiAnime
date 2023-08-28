@@ -36,18 +36,19 @@ def start(bot, update):
     user_states[user_id] = 'waiting_name'
     user_messages[user_id] = []  # Initialize an empty list for user messages
     app.send_message(user_id, "**State your AniWatch profile link.**")
-
+   
 # Define a function to handle user messages
 @app.on_message(filters.text)
 async def handle_message(bot, update):
     user_id = update.from_user.id
     if user_id in user_states:
         state = user_states[user_id]
-        
+
         if state == 'waiting_name':
+            user_messages[user_id].append(update.text)
             await app.send_message(user_id, "**Mention the date of your punishment.**")
             user_states[user_id] = 'waiting_dob'
-        
+            user_messages[user_id].append(update.text)
         elif state == 'waiting_dob':
             await app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
             user_states[user_id] = 'waiting_tup'
