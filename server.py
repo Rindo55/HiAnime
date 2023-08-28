@@ -48,7 +48,7 @@ def handle_message(bot, update):
             user_states[user_id] = 'waiting_tup'       
         elif state == 'waiting_tup':
             bot.send_message(user_id, "**Your appeal has been received and is now under review.**")
-        del user_states[user_id]
+            del user_states[user_id]
  
 @app.on_message(filters.regex("fd") & filters.private)
 async def handle_message(client, message):
