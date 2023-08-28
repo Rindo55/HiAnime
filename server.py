@@ -32,11 +32,11 @@ async def handle_message(client, message):
     user=message.from_user
     user=user.id
     asyncio.ensure_future(timeout_message(message.chat.id))
-    profile = app.send_message(message.chat.id, text="**State your profile link.**")
+    profile = await app.send_message(message.chat.id, text="**State your profile link.**")
     @app.on_message(filters.private & filters.text)
     async def get_punishment_date(bot, message):  
         asyncio.ensure_future(timeout_message(message.chat.id))
-        pun = app.send_message(message.chat.id, text="**Mention the date of your punishment.**")
+        pun = await app.send_message(message.chat.id, text="**Mention the date of your punishment.**")
         punishment_date = message.text
         if len(punishment_date) > 15:
             asyncio.ensure_future(timeout_message(message.chat.id))
