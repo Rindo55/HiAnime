@@ -18,7 +18,7 @@ api_id = 3845818
 api_hash = "95937bcf6bc0938f263fc7ad96959c6d"
 bot_token = "6428443845:AAF9usGZRMRPPMuOfcjClNypt3N_p2_gUZc"
 app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
-
+user_states = {}
 async def timeout_message(chat_id):
     await asyncio.sleep(300)
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
@@ -31,6 +31,7 @@ def start(bot, update):
     user_id = update.from_user.id
     user_states[user_id] = 'waiting_name'
     bot.send_message(user_id, "Hi! Please send me your name.")
+
 
 # Define a function to handle user messages
 @app.on_message(filters.text)
