@@ -30,7 +30,7 @@ async def timeoutz_message(chat_id):
 def start(bot, update):
     user_id = update.from_user.id
     user_states[user_id] = 'waiting_name'
-    bot.send_message(user_id, "Hi! Please send me your name.")
+    bot.send_message(user_id, "**State your AniWatch profile link.**")
 
 
 # Define a function to handle user messages
@@ -41,12 +41,13 @@ def handle_message(bot, update):
         state = user_states[user_id]
 
         if state == 'waiting_name':
-            bot.send_message(user_id, "You got a good name.")
+            bot.send_message(user_id, "**Mention the date of your punishment.**")
             user_states[user_id] = 'waiting_dob'
-            bot.send_message(user_id, "Now, please send me your date of birth (DOB).")
-
         elif state == 'waiting_dob':
-            bot.send_message(user_id, "Good!")
+            bot.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
+            user_states[user_id] = 'waiting_tup'       
+        elif state == 'waiting_tup':
+            bot.send_message(user_id, "**Your appeal has been received and is now under review.**")
  
 @app.on_message(filters.regex("fd") & filters.private)
 async def handle_message(client, message):
