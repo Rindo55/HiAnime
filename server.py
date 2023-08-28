@@ -16,8 +16,23 @@ import requests
 from html_telegraph_poster import TelegraphPoster
 api_id = 3845818
 api_hash = "95937bcf6bc0938f263fc7ad96959c6d"
-bot_token = "6358924089:AAF9ruOPppIC-F3z2LwAym-SGqOFsf-cxuM"
+bot_token = "6428443845:AAF9usGZRMRPPMuOfcjClNypt3N_p2_gUZc"
 app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
+
+async def timeout_message(chat_id):
+    await asyncio.sleep(300)
+    await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
+    
+@app.on_message(filters.regex("/start appeal") & filters.private)
+def handle_message(client, message):
+    user=message.from_user
+    user=user.id
+    username=user.username
+    profile = app.send_message(message.chat.id, text="**State your profile link.**"
+    asyncio.ensure_future(timeout_message(message.chat.id))   
+
+
+
 def get_anime_info(anime_title):
     url = f"https://api.jikan.moe/v4/anime?q={anime_title}"
     response = requests.get(url)
