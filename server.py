@@ -31,25 +31,26 @@ async def timeoutz_message(chat_id):
 async def handle_message(client, message):
     user=message.from_user
     user=user.id
-    profile = await app.send_message(message.chat.id, text="**State your profile link.**")
-    @app.on_message(filters.private & filters.text)
-    async def get_punishment_date(bot, message):  
-  
-        pun = await app.send_message(message.chat.id, text="**Mention the date of your punishment.**")
-        punishment_date = message.text
-        if len(punishment_date) > 15:
-            await message.reply("Character limit exceeded. Please enter a date within 15 characters.")
-        else:
-
-            await app.send_message(message.chat.id, text="**APPEAL**\nYou may now send your appeal.\n`[Warning]: This question has a lower limit of 301 characters. Any answer that won't fall within the accepted number of characters will be ignored.")
-        @app.on_message(filters.private & filters.text)
-        async def get_appeal(bot, message):
-            appeal = message.text
-            if len(appeal) < 301:
-                await message.reply("Number of characters must be exceed 301. Send your appeal again.")
-            else:
-                await message.reply("Your appeal has been received and is under review. Please make sure to join our group for updates regarding your appeal.")
-        
+    profile = await app.send_message(message.chat.id, text="**Reply to this message with your profile link.**")
+    if message.reply_to_message.text == "**Reply to this message with your profile link.**":
+        app.send_message(
+            chat_id=message.chat.id,
+            text="**Reply to this message with date of your punishment.**"
+        )
+    elif message.reply_to_message.text == "**Reply to this message with date of your punishment.**":
+        name = message.text
+        app.send_message(
+            chat_id=message.chat.id,
+            text="**Reply to this message with your appeal.\n`[Warning]: This question has a lower limit of 301 characters. Any answer that won't fall within the accepted number of characters will be ignored.**"
+        )
+    elif message.reply_to_message.text == "**Reply to this message with your appeal.\n`[Warning]: This question has a lower limit of 301 characters. Any answer that won't fall within the accepted number of characters will be ignored.**":
+        name = message.text
+        app.send_message(
+            chat_id=message.chat.id,
+            text="**Your appeal had been received and is now under review."
+        )
+    else:
+        pass
 def get_anime_info(anime_title):
     url = f"https://api.jikan.moe/v4/anime?q={anime_title}"
     response = requests.get(url)
