@@ -45,17 +45,17 @@ async def handle_message(bot, update):
         state = user_states[user_id]
 
         if state == 'waiting_name':
-            user_messages[user_id].append(f"AniWatch Profile Link: {update.text})
+            user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
             await app.send_message(user_id, "**Mention the date of your punishment.**")
             user_states[user_id] = 'waiting_dob'
-            user_messages[user_id].append(f"Date of punishment: {update.text}))
+            user_messages[user_id].append(f"Date of punishment: {update.text}")
         elif state == 'waiting_dob':
             await app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
             user_states[user_id] = 'waiting_tup'
         
         elif state == 'waiting_tup':
             # Append the user's message to the list of messages
-            user_messages[user_id].append(f"Appeal: {update.text}))
+            user_messages[user_id].append(f"Appeal: {update.text}")
             await app.send_message(user_id, "**Your appeal has been received and is now under review.**")
             combined_message = "\n".join(user_messages[user_id])  # Combine user messages
             ch_id=-1001582654217
