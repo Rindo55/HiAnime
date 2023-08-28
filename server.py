@@ -37,14 +37,14 @@ async def handle_message(client, message):
     @app.on_message(filters.private & filters.text)
     async def get_punishment_date(bot, message):  
         asyncio.ensure_future(timeout_message(message.chat.id))
-        pun = app.send_message(message.chat.id, text="**Mention the date of your punishment.**"
+        pun = app.send_message(message.chat.id, text="**Mention the date of your punishment.**")
         punishment_date = message.text
         if len(punishment_date) > 15:
             asyncio.ensure_future(timeout_message(message.chat.id))
             await message.reply("Character limit exceeded. Please enter a date within 15 characters.")
         else:
             asyncio.ensure_future(timeoutz_message(message.chat.id))
-            await app.send_message("**APPEAL**\nYou may now send your appeal.\n`[Warning]: This question has a lower limit of 301 characters. Any answer that won't fall within the accepted number of characters will be ignored.")
+            await app.send_message(message.chat.id, text="**APPEAL**\nYou may now send your appeal.\n`[Warning]: This question has a lower limit of 301 characters. Any answer that won't fall within the accepted number of characters will be ignored.")
         @app.on_message(filters.private & filters.text)
         async def get_appeal(bot, message):
             appeal = message.text
