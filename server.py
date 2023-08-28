@@ -61,7 +61,7 @@ async def handle_message(bot, update):
             ch_id = -1001582654217
             await app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
             del user_states[user_id]
-            del user_messages[user_id]"
+            del user_messages[user_id]
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
     combined_message = "\n".join(user_messages[user_id])  # Combine user messages
