@@ -39,7 +39,7 @@ def start(bot, update):
 
 # Define a function to handle user messages
 @app.on_message(filters.text)
-def handle_message(bot, update):
+async def handle_message(bot, update):
     user_id = update.from_user.id
     if user_id in user_states:
         state = user_states[user_id]
