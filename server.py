@@ -45,7 +45,7 @@ async def handle_message(bot, update):
         state = user_states[user_id]
         
         if state == 'waiting_name':
-            app.send_message(user_id, "**Mention the date of your punishment.**")
+            await app.send_message(user_id, "**Mention the date of your punishment.**")
             user_states[user_id] = 'waiting_dob'
         
         elif state == 'waiting_dob':
