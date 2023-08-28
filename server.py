@@ -22,17 +22,37 @@ app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 async def timeout_message(chat_id):
     await asyncio.sleep(300)
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
+
+async def timeoutz_message(chat_id):
+    await asyncio.sleep(500)
+    await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
     
 @app.on_message(filters.regex("/start appeal") & filters.private)
-def handle_message(client, message):
+async def handle_message(client, message):
     user=message.from_user
     user=user.id
     username=user.username
     profile = app.send_message(message.chat.id, text="**State your profile link.**"
-    asyncio.ensure_future(timeout_message(message.chat.id))   
-
-
-
+    asyncio.ensure_future(timeout_message(message.chat.id))
+    app.on_message(filters.private & filters.text)
+    async def get_punishment_date(bot, message):    
+        pun = app.send_message(message.chat.id, text="**Mention the date of your punishment.**"
+        asyncio.ensure_future(timeout_message(message.chat.id))
+        punishment_date = message.text
+        if len(punishment_date) > 15:
+            await message.reply("Character limit exceeded. Please enter a date within 15 characters.")
+            asyncio.ensure_future(timeout_message(message.chat.id))
+        else:
+            await app.send_message("**APPEAL**\nYou may now send your appeal.\n`[Warning]: This question has a lower limit of 301 characters. Any answer that won't fall within the accepted number of characters will be ignored.")
+            asyncio.ensure_future(timeoutz_message(message.chat.id))
+        app.on_message(filters.private & filters.text)
+        async def get_appeal(bot, message):
+            appeal = message.text
+            if len(appeal) < 301:
+                await message.reply("Number of characters must be exceed 301. Send your appeal again.")
+            else:
+                await message.reply("Your appeal has been received and is under review. Please make sure to join our group for updates regarding your appeal.")
+        
 def get_anime_info(anime_title):
     url = f"https://api.jikan.moe/v4/anime?q={anime_title}"
     response = requests.get(url)
