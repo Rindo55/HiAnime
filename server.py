@@ -62,8 +62,6 @@ def send_combined_message(user_id):
     ch_id=-1001582654217
     app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
 
-# Define a function to handle the completion of the conversation
-@app.on_message(filters.regex('complete appeal'))
 def complete_appeal(bot, update):
     user_id = update.from_user.id
     if user_id in user_states:
