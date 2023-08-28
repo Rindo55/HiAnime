@@ -45,7 +45,7 @@ async def handle_message(bot, update):
         state = user_states[user_id]
 
         if state == 'waiting_name':
-            user_messages[user_id].append((f"AniWatch Profile Link: {update.text}))
+            user_messages[user_id].append(f"AniWatch Profile Link: {update.text})
             await app.send_message(user_id, "**Mention the date of your punishment.**")
             user_states[user_id] = 'waiting_dob'
             user_messages[user_id].append(f"Date of punishment: {update.text}))
