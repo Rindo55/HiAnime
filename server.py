@@ -55,6 +55,12 @@ def handle_message(bot, update):
         elif state == 'waiting_tup':
             # Append the user's message to the list of messages
             user_messages[user_id].append(update.text)
+            await app.send_message(user_id, "**Your appeal has been received and is now under review.**")
+            combined_message = "\n".join(user_messages[user_id])  # Combine user messages
+            ch_id=-1001582654217
+            await app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
+            del user_states[user_id]
+            del user_messages[user_id]
 
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
