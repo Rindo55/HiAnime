@@ -33,10 +33,10 @@ user_messages = {}
 @app.on_message(filters.regex('/start appeal'))
 def start(bot, update):
     user_id = update.from_user.id
-    user_states[user_id] = 'waiting_name'
+    user_states[user_id] = 'waiting_link'
     user_messages[user_id] = []  # Initialize an empty list for user messages
-    app.send_message(user_id, "**State your AniWatch profile link.**")
-   
+    app.send_message(user_id, "State your AniWatch profile link.")
+
 # Define a function to handle user messages
 @app.on_message(filters.text)
 async def handle_message(bot, update):
@@ -44,25 +44,24 @@ async def handle_message(bot, update):
     if user_id in user_states:
         state = user_states[user_id]
         user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
-        if state == 'waiting_name':
-            
-            await app.send_message(user_id, "**Mention the date of your punishment.**")
-            user_states[user_id] = 'waiting_dob'
+        if state == 'waiting_link':
+            user_states[user_id] = 'waiting_punishment_date'
+            user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
+            await app.send_message(user_id, "Mention the date of your punishment.")
+
+        elif state == 'waiting_punishment_date':
+            user_states[user_id] = 'waiting_appeal'
             user_messages[user_id].append(f"Date of punishment: {update.text}")
-        elif state == 'waiting_dob':
-            await app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
-            user_states[user_id] = 'waiting_tup'
-        
-        elif state == 'waiting_tup':
-            # Append the user's message to the list of messages
+            await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.")
+
+        elif state == 'waiting_appeal':
             user_messages[user_id].append(f"Appeal: {update.text}")
-            await app.send_message(user_id, "**Your appeal has been received and is now under review.**")
+            await app.send_message(user_id, "Your appeal has been received and is now under review.")
             combined_message = "\n".join(user_messages[user_id])  # Combine user messages
-            ch_id=-1001582654217
+            ch_id = -1001582654217
             await app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
             del user_states[user_id]
-            del user_messages[user_id]
-
+            del user_messages[user_id]")
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
     combined_message = "\n".join(user_messages[user_id])  # Combine user messages
