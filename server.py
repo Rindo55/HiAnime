@@ -26,12 +26,16 @@ async def timeout_message(chat_id):
 async def timeoutz_message(chat_id):
     await asyncio.sleep(500)
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
+user_states = {}
+user_messages = {}
+
+# Define a function to handle the /start command
 @app.on_message(filters.regex('/start appeal'))
 def start(bot, update):
     user_id = update.from_user.id
     user_states[user_id] = 'waiting_name'
-    bot.send_message(user_id, "**State your AniWatch profile link.**")
-
+    user_messages[user_id] = []  # Initialize an empty list for user messages
+    app.send_message(user_id, "**State your AniWatch profile link.**")
 
 # Define a function to handle user messages
 @app.on_message(filters.text)
@@ -39,16 +43,35 @@ def handle_message(bot, update):
     user_id = update.from_user.id
     if user_id in user_states:
         state = user_states[user_id]
-
+        
         if state == 'waiting_name':
-            bot.send_message(user_id, "**Mention the date of your punishment.**")
+            app.send_message(user_id, "**Mention the date of your punishment.**")
             user_states[user_id] = 'waiting_dob'
+        
         elif state == 'waiting_dob':
-            bot.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
-            user_states[user_id] = 'waiting_tup'       
+            app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**")
+            user_states[user_id] = 'waiting_tup'
+        
         elif state == 'waiting_tup':
-            bot.send_message(user_id, "**Your appeal has been received and is now under review.**")
-            del user_states[user_id]
+            # Append the user's message to the list of messages
+            user_messages[user_id].append(update.text)
+
+# Define a function to send the combined message to the channel
+def send_combined_message(user_id):
+    combined_message = "\n".join(user_messages[user_id])  # Combine user messages
+    ch_id=1582654217
+    app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
+
+# Define a function to handle the completion of the conversation
+@app.on_message(filters.regex('complete appeal'))
+def complete_appeal(bot, update):
+    user_id = update.from_user.id
+    if user_id in user_states:
+        app.send_message(user_id, "**Your appeal has been received and is now under review.**")
+        send_combined_message(user_id)
+        del user_states[user_id]
+        del user_messages[user_id]
+
  
 @app.on_message(filters.regex("fd") & filters.private)
 async def handle_message(client, message):
