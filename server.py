@@ -44,12 +44,13 @@ async def handle_message(bot, update):
     if user_id in user_states:
         state = user_states[user_id]
         
-        if state == 'waiting_link' and "https" in update.text:
-            user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
-            user_states[user_id] = 'waiting_punishment_date'
-            await app.send_message(user_id, "Mention the date of your punishment.")
-        elif "https" not in update.text:
-            await app.send_message(user_id, "Send a valid link.")
+        if state == 'waiting_link':
+            if "https" in update.text:
+                user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
+                user_states[user_id] = 'waiting_punishment_date'
+                await app.send_message(user_id, "Mention the date of your punishment.")
+            elif "https" not in update.text:
+                await app.send_message(user_id, "Send a valid link.")
         elif state == 'waiting_punishment_date':
             user_messages[user_id].append(f"Date of punishment: {update.text}")
             user_states[user_id] = 'waiting_appeal'
