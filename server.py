@@ -103,24 +103,19 @@ async def votes_(_,query: CallbackQuery):
         id = query.message.id
         user = query.from_user.id
         vote = int(query.data.replace("vote","").strip())
-
         is_vote = await is_voted(id,user)
         if is_vote == 1:
             return await query.answer("You've already voted. You can't vote again.")
         await query.answer()
-
-        x = query.message.reply_markup['inline_keyboard'][0]
-        a = x[0]['text'].replace('👍','').strip()
-        b = x[1]['text'].replace('👎','').strip()
-
-        if a == "":
-            a = 0
-        if b == "":
-            b = 0
-        
-        a = int(a)
-        b = int(b)
-
+        x = query.message.reply_markup
+        a = 0
+        b = 0
+        for row in x.inline_keyboard:
+            for button in row:
+                if button.text.startswith('👍'):
+                    a = int(button.text[2:])
+                elif button.text.startswith('👎'):
+                    b = int(button.text[2:])
         if vote == 1:
             a = a + 1
             buttons = get_vote_buttons(a,b)
@@ -129,7 +124,6 @@ async def votes_(_,query: CallbackQuery):
             b = b + 1
             buttons = get_vote_buttons(a,b)
             await query.message.edit_reply_markup(reply_markup=buttons)
-
         await save_vote(id,user)
     except Exception as e:
         print(e)
