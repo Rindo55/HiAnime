@@ -34,8 +34,8 @@ user_messages = {}
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="ACCEPT", callback_data="vote1"),
-            InlineKeyboardButton(text="DENY", callback_data="vote2"),
+            InlineKeyboardButton(text="👍", callback_data="vote1"),
+            InlineKeyboardButton(text="👎", callback_data="vote2"),
         ]
     ]
 )
@@ -89,8 +89,8 @@ def get_vote_buttons(a,b):
     buttons = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text=f"ACCEPT {a}", callback_data="vote1"),
-                InlineKeyboardButton(text=f"DENY {b}", callback_data="vote2"),
+                InlineKeyboardButton(text=f"👍 {a}", callback_data="vote1"),
+                InlineKeyboardButton(text=f"👎 {b}", callback_data="vote2"),
             ]
         ]
     )
@@ -110,8 +110,8 @@ async def votes_(_,query: CallbackQuery):
         await query.answer()
 
         x = query.message.reply_markup['inline_keyboard'][0]
-        a = x[0]['text'].replace('ACCEPT','').strip()
-        b = x[1]['text'].replace('DENY','').strip()
+        a = x[0]['text'].replace('👍','').strip()
+        b = x[1]['text'].replace('👎','').strip()
 
         if a == "":
             a = 0
