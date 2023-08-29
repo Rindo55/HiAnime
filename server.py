@@ -29,9 +29,6 @@ async def timeoutz_message(chat_id):
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
 user_states = {}
 user_messages = {}
-@app.on_message(filters.regex('/start'))
-async def start(bot, message: Message):
-  return await message.reply_text("**Hi I am an appeal bot for aniwatch.to To make an appeal [click here](https://aniwatchappealbot?start=appeal)**")
 
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
