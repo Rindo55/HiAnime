@@ -28,6 +28,47 @@ async def timeoutz_message(chat_id):
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
 user_states = {}
 user_messages = {}
+@app.on_callback_query(filters.regex("vote"))
+async def votes_(_,query: CallbackQuery):
+    try:
+        id = query.message.message_id
+        user = query.from_user.id
+        vote = int(query.data.replace("vote","").strip())
+
+        is_vote = await is_voted(id,user)
+        if is_vote == 1:
+            return await query.answer("You Have Already Voted... You Can't Vote Again")
+        await query.answer()
+
+        x = query.message.reply_markup['inline_keyboard'][0]
+        a = x[0]['text'].replace('👍','').strip()
+        b = x[1]['text'].replace('♥️','').strip()
+        c = x[2]['text'].replace('👎','').strip()
+
+        if a == "":
+            a = 0
+        if b == "":
+            b = 0
+        if c == "":
+            c = 0
+        
+        a = int(a)
+        b = int(b)
+        c = int(c)
+
+        if vote == 1:
+            a = a + 1
+            buttons = get_vote_buttons(a,b,c)
+            await query.message.edit_reply_markup(reply_markup=buttons)
+        elif vote == 2:
+            b = b + 1
+            buttons = get_vote_buttons(a,b,c)
+            await query.message.edit_reply_markup(reply_markup=buttons)
+        elif vote == 3:
+            c = c + 1
+            buttons = get_vote_buttons(a,b,c)
+            await query.message.edit_reply_markup(reply_markup=buttons)
+    return
 
 # Define a function to handle the /start command
 @app.on_message(filters.regex('/start appeal'))
@@ -67,7 +108,15 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001582654217
-                await app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
+                await app.send_message(ch_id, text="User ID: {user_id}\n\n{combined_message}", buttons = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(text=f"👍 {a}", callback_data="vote1"),
+                            InlineKeyboardButton(text=f"♥️ {b}", callback_data="vote2"),
+                            InlineKeyboardButton(text=f"👎 {c}", callback_data="vote3")
+                        ]
+                    ]
+                ))
                 del user_states[user_id]
                 del user_messages[user_id]
             else:
