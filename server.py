@@ -52,19 +52,20 @@ def start(bot, update):
     user_id = update.from_user.id
     user_states[user_id] = 'waiting_link'
     user_messages[user_id] = []  # Initialize an empty list for user messages
-    app.send_message(user_id, "State your AniWatch profile link.")
+    app.send_message(user_id, "State your **AniWatch profile link.**")
 
 # Define a function to handle user messages
 @app.on_message(filters.text)
 async def handle_message(bot, update):
-    global yes_votes, no_votes
     user_id = update.from_user.id
+    mention = update.from_user.mention()
+    un = update.from_user.username
     if user_id in user_states:
         state = user_states[user_id]
         
         if state == 'waiting_link':
-            if "aniwatch" in update.text:
-                user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
+            if "aniwatch" or "ANIWATCH" or "AniWatch" in update.text:
+                user_messages[user_id].append(f"**AniWatch Profile Link:** {update.text}")
                 user_states[user_id] = 'waiting_punishment_date'
                 await app.send_message(user_id, text="Mention the **date of your punishment.** \n\n(Note: Number of characters for this query must **not exceed** the limit of **15**)")
             else:
@@ -81,16 +82,16 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
         if state == 'waiting_appeal':
             if len(update.text) > 301:
-                user_messages[user_id].append(f"Appeal: {update.text}")
+                user_messages[user_id].append(f"**Appeal:** {update.text}")
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001582654217
-                await app.send_message(ch_id, text=f"User ID: {user_id}\n\n{combined_message}", reply_markup=VOTE_MARKUP)
+                await app.send_message(ch_id, text=f"User: {mention}\nUser ID: {user_id}\nUser Name:{un}\n\n{combined_message}", reply_markup=VOTE_MARKUP)
                 del user_states[user_id]
                 del user_messages[user_id]
             else:
                 apl = await app.send_message(user_id, "Your appeal has been ignored due number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
-                rep_id=apl.id
+                rep_id=int(apl.id)
                 untextx = await app.send_message(
                     chat_id=ch_id,
                     text="💬**REMARK**",
