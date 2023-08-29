@@ -46,12 +46,13 @@ async def handle_message(bot, update):
         user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
         if state == 'waiting_link':
             user_states[user_id] = 'waiting_punishment_date'
-            user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
+            
             await app.send_message(user_id, "Mention the date of your punishment.")
 
         elif state == 'waiting_punishment_date':
-            user_states[user_id] = 'waiting_appeal'
             user_messages[user_id].append(f"Date of punishment: {update.text}")
+            user_states[user_id] = 'waiting_appeal'
+            
             await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.")
 
         elif state == 'waiting_appeal':
