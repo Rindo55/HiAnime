@@ -28,24 +28,31 @@ async def timeoutz_message(chat_id):
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
 user_states = {}
 user_messages = {}
+yes_votes = 0
+no_votes = 0
 def gen_markup():
     markup = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("ACCEPT", callback_data="cb_yes"),
-                InlineKeyboardButton("DENY", callback_data="cb_no")
+                InlineKeyboardButton(f"ACCEPT ({yes_votes})", callback_data="cb_yes"),
+                InlineKeyboardButton(f"DENY ({no_votes})", callback_data="cb_no")
             ]
         ]
     )
     return markup
+
+@app.on_callback_query()
 async def handle_callback_query(client, query):
     global yes_votes, no_votes
     if query.data == "cb_yes":
         yes_votes += 1
-        await query.answer("You accepted this appeal")
+        await query.answer("You voted Yes")
     elif query.data == "cb_no":
         no_votes += 1
-        await query.answer("You declined this voted")
+        await query.answer("You voted No")
+
+    # Update the inline keyboard with the new vote counts
+    await query.message.edit_reply_markup(reply_markup=gen_markup())
 
 # Define a function to handle the /start command
 @app.on_message(filters.regex('/start appeal'))
