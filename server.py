@@ -126,11 +126,11 @@ async def votes_(_,query: CallbackQuery):
         for row in x.inline_keyboard:
             for button in row:
                 if button.text.startswith('ACCEPT'):
-                    a_str = button.text[2:].strip()
+                    a_str = button.text[7:].strip()
                     if a_str:
                         a = int(a_str)
                 elif button.text.startswith('DENY'):
-                    b_str = button.text[2:].strip()
+                    b_str = button.text[5:].strip()
                     if b_str:
                         b = int(b_str)
         if vote == 1:
