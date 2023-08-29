@@ -131,8 +131,9 @@ async def votes_(_,query: CallbackQuery):
             await query.message.edit_reply_markup(reply_markup=buttons)
 
         await save_vote(id,user)
-    except:
-        pass
+    except Exception as e:
+        print(e)
+        
     
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
