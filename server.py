@@ -49,15 +49,15 @@ async def handle_message(bot, update):
                 user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
                 user_states[user_id] = 'waiting_punishment_date'
                 await app.send_message(user_id, "Mention the **date of your punishment.**\n(`Note: Number of charcters for this query must not exceed the limit of 15`")
-            elif "https" not in update.text:
+            else:
                 await app.send_message(user_id, "Send a valid link.")
-                if state == 'waiting_punishment_date':
-                    if len(update.text) <= 15:
-                        user_messages[user_id].append(f"**Date of punishment:** {update.text}")
-                        user_states[user_id] = 'waiting_appeal'
-                        await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.\n`Note: Number of charcters for this query must exceed 301 else appeal will be ignored.`")
-                    elif len(update.text) > 15:
-                        await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
+        if state == 'waiting_punishment_date':
+            if len(update.text) <= 15:
+                user_messages[user_id].append(f"**Date of punishment:** {update.text}")
+                user_states[user_id] = 'waiting_appeal'
+                await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.\n`Note: Number of charcters for this query must exceed 301 else appeal will be ignored.`")
+            else: 
+                await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
 
         elif state == 'waiting_appeal':
             if len(update.text) > 301:
