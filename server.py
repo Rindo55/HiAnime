@@ -67,7 +67,7 @@ async def votes_(_,query: CallbackQuery):
             c = c + 1
             buttons = get_vote_buttons(a,b,c)
             await query.message.edit_reply_markup(reply_markup=buttons)
-    return
+        return
 
 # Define a function to handle the /start command
 @app.on_message(filters.regex('/start appeal'))
