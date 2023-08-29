@@ -38,7 +38,7 @@ text = "Hello, world!"
 
 # create the post using the Comments API
 x_url="https://api.comments.bot/createPost"
-tgshare = requests.get(x_url, params={"api_url": apiz_url, "owner_id": owner_id, "type": post_type, "text": text})
+tgshare = requests.get(x_url, params={"api_key": apiz_key, "owner_id": owner_id, "type": post_type, "text": text})
 uploadxz=tgshare.json()
 directlink = uploadxz["result"]
 # print the result
