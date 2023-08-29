@@ -53,12 +53,12 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Send a valid link.")
         if state == 'waiting_punishment_date':
             if len(update.text) <= 15:
-                if any(char.isdigit() for char in message.text):
+                if any(char.isdigit() for char in update.text):
                     user_messages[user_id].append(f"**Date of punishment:** {update.text}")
                     user_states[user_id] = 'waiting_appeal'
                     await app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**\n\n(Note: Number of characters for this query **must exceed 301** else appeal will be ignored.)")
                 else:
-                    await app.send_message(user_id, "Date must contain numeral. Please send **Date of punishment** again in the below format\n\nxx/xx/xxxx or xx-xx-xxxx")
+                    await app.send_message(user_id, "Date must contain numeral. Please send **Date of punishment** again in the below format.\n\n xx/xx/xxxx or xx-xx-xxxx")
             else: 
                 await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
         if state == 'waiting_appeal':
