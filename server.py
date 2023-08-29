@@ -40,8 +40,8 @@ text = "Hello, world!"
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="ACCEPT", callback_data="vote1"),
-            InlineKeyboardButton(text="DENY", callback_data="vote2")
+            InlineKeyboardButton(text="✅ACCEPT", callback_data="vote1"),
+            InlineKeyboardButton(text="❌DENY", callback_data="vote2")
         ]
     ]
 )
@@ -92,7 +92,7 @@ async def handle_message(bot, update):
                 apl = await app.send_message(user_id, "Your appeal has been ignored due number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
                 rep_id=apl.id
                 untextx = await app.send_message(
-                    chat_id=KAYO_ID,
+                    chat_id=ch_id,
                     text="💬**REMARK**",
                     reply_to_message_id=rep_id
                 )
@@ -102,8 +102,8 @@ def get_vote_buttons(a,b):
     buttons = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text=f"ACCEPT {a}", callback_data="vote1"),
-                InlineKeyboardButton(text=f"DENY {b}", callback_data="vote2")
+                InlineKeyboardButton(text=f"✅ACCEPT ({a})", callback_data="vote1"),
+                InlineKeyboardButton(text=f"❌DENY ({b})", callback_data="vote2")
             ]
         ]
     )
@@ -125,12 +125,12 @@ async def votes_(_,query: CallbackQuery):
         b = 0
         for row in x.inline_keyboard:
             for button in row:
-                if button.text.startswith('ACCEPT'):
-                    a_str = button.text[7:].strip()
+                if button.text.startswith('✅ACCEPT'):
+                    a_str = button.text[8:].strip()
                     if a_str:
                         a = int(a_str)
-                elif button.text.startswith('DENY'):
-                    b_str = button.text[5:].strip()
+                elif button.text.startswith('❌DENY'):
+                    b_str = button.text[6:].strip()
                     if b_str:
                         b = int(b_str)
         if vote == 1:
