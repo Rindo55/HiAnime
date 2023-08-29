@@ -48,23 +48,30 @@ async def handle_message(bot, update):
             if "aniwatch" in update.text:
                 user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
                 user_states[user_id] = 'waiting_punishment_date'
-                await app.send_message(user_id, "Mention the date of your punishment.")
+                await app.send_message(user_id, "Mention the **date of your punishment.**\n(`Note: Number of charcters for this query must not exceed the limit of 15`")
             elif "https" not in update.text:
                 await app.send_message(user_id, "Send a valid link.")
         elif state == 'waiting_punishment_date':
-            user_messages[user_id].append(f"Date of punishment: {update.text}")
-            user_states[user_id] = 'waiting_appeal'
-            
-            await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.")
+            if len(update.text) <= 15:
+                user_messages[user_id].append(f"**Date of punishment:** {update.text}")
+                user_states[user_id] = 'waiting_appeal'
+                await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.\n`Note: Number of charcters for this query must exceed 301 else appeal will be ignored.`")
+            else:
+                 await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
 
         elif state == 'waiting_appeal':
-            user_messages[user_id].append(f"Appeal: {update.text}")
-            await app.send_message(user_id, "Your appeal has been received and is now under review.")
-            combined_message = "\n".join(user_messages[user_id])  # Combine user messages
-            ch_id = -1001582654217
-            await app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
-            del user_states[user_id]
-            del user_messages[user_id]
+            if len(update.text) > 301:
+                user_messages[user_id].append(f"Appeal: {update.text}")
+                await app.send_message(user_id, "Your appeal has been received and is now under review.")
+                combined_message = "\n".join(user_messages[user_id])  # Combine user messages
+                ch_id = -1001582654217
+                await app.send_message(ch_id, f"User ID: {user_id}\n\n{combined_message}")
+                del user_states[user_id]
+                del user_messages[user_id]
+            else:
+                await app.send_message(user_id, "Number of characters must be above **301** for this query. Send your **appeal** again with atleast 301 characters.")
+
+                
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
     combined_message = "\n".join(user_messages[user_id])  # Combine user messages
