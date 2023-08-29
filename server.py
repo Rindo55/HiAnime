@@ -35,7 +35,8 @@ VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton(text="👍", callback_data="vote1"),
-            InlineKeyboardButton(text="👎", callback_data="vote2")
+            InlineKeyboardButton(text="👎", callback_data="vote2"),
+            InlineKeyboardButton(text="💬", callback_data="comment_thread")
         ]
     ]
 )
@@ -131,6 +132,18 @@ async def votes_(_,query: CallbackQuery):
         await save_vote(id,user)
     except Exception as e:
         print(e)
+@app.on_callback_query(filters.regex("comment_thread"))
+async def comment_thread(_, query: CallbackQuery):
+    # Get the message ID and chat ID
+    message_id = query.message.message_id
+    chat_id = query.message.chat.id
+    
+    # Construct the URL for the comment thread
+    url = f"https://t.me/c/{str(chat_id)[4:]}/{message_id}"
+    
+    # Send the URL to the user
+    await query.answer()
+    await query.message.reply_text(f"Comment thread: {url}")
     
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
