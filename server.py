@@ -1,5 +1,5 @@
 from pyrogram import Client, idle, filters, enums
-from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
+from pymongo import MongoClient
 import time
 from SafoneAPI import SafoneAPI
 import os
@@ -29,9 +29,8 @@ async def timeoutz_message(chat_id):
     await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
 user_states = {}
 user_messages = {}
-MONGO_DB_URI="mongodb+srv://bleach:x265@cluster0.g7qvfa0.mongodb.net/?retryWrites=true&w=majority"
-mongo_client = MongoClient(MONGO_DB_URI)
-db = mongo_client.autoani
+client = MongoClient("mongodb+srv://bleach:x265@cluster0.g7qvfa0.mongodb.net/?retryWrites=true&w=majority")
+db = client["my_database"]
 collection = db["voted_users"]
 def gen_markup():
     markup = InlineKeyboardMarkup(
