@@ -58,8 +58,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.\n`Note: Number of charcters for this query must exceed 301 else appeal will be ignored.`")
             else: 
                 await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
-
-        elif state == 'waiting_appeal':
+        if state == 'waiting_appeal':
             if len(update.text) > 301:
                 user_messages[user_id].append(f"Appeal: {update.text}")
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
