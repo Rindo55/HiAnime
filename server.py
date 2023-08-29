@@ -35,7 +35,7 @@ VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton(text="👍", callback_data="vote1"),
-            InlineKeyboardButton(text="👎", callback_data="vote2"),
+            InlineKeyboardButton(text="👎", callback_data="vote2")
         ]
     ]
 )
@@ -90,7 +90,7 @@ def get_vote_buttons(a,b):
         [
             [
                 InlineKeyboardButton(text=f"👍 {a}", callback_data="vote1"),
-                InlineKeyboardButton(text=f"👎 {b}", callback_data="vote2"),
+                InlineKeyboardButton(text=f"👎 {b}", callback_data="vote2")
             ]
         ]
     )
