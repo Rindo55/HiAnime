@@ -93,7 +93,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001582654217
-                await app.send_message(ch_id, text="User ID: {user_id}\n\n{combined_message}", reply_markup=gen_markup())
+                await app.send_message(ch_id, text=f"User ID: {user_id}\n\n{combined_message}", reply_markup=gen_markup())
                 del user_states[user_id]
                 del user_messages[user_id]
             else:
