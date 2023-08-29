@@ -100,7 +100,7 @@ def get_vote_buttons(a,b):
 @app.on_callback_query(filters.regex("vote"))
 async def votes_(_,query: CallbackQuery):
     try:
-        id = query.message.message_id
+        id = query.message.id
         user = query.from_user.id
         vote = int(query.data.replace("vote","").strip())
 
