@@ -46,6 +46,8 @@ async def handle_message(bot, update):
         
         if state == 'waiting_link' and "https" in update.text:
             user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
+            else:
+                app.send_message(message.chat.id, text="Please send a link.")
             user_states[user_id] = 'waiting_punishment_date'
             
             await app.send_message(user_id, "Mention the date of your punishment.")
