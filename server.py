@@ -60,7 +60,7 @@ async def handle_message(bot, update):
         state = user_states[user_id]
         
         if state == 'waiting_link':
-            if "aniwatch" or "ANIWATCH" or "AniWatch" in update.text:
+            if "http" in update.text:
                 user_messages[user_id].append(f"**AniWatch Profile Link:** {update.text}")
                 user_states[user_id] = 'waiting_punishment_date'
                 await app.send_message(user_id, text="Mention the **date of your punishment.** \n\n(Note: Number of characters for this query must **not exceed** the limit of **15**)")
