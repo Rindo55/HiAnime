@@ -40,9 +40,8 @@ text = "Hello, world!"
 x_url="https://api.comments.bot/createPost"
 tgshare = requests.get(x_url, params={"api_key": apiz_key, "owner_id": owner_id, "type": post_type, "text": text})
 uploadxz=tgshare
-directlink = uploadxz["result"]
 # print the result
-print(directlink)
+print(tgshare)
 
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
