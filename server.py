@@ -135,7 +135,7 @@ async def votes_(_,query: CallbackQuery):
 @app.on_callback_query(filters.regex("comment_thread"))
 async def comment_thread(_, query: CallbackQuery):
     # Get the message ID and chat ID
-    message_id = query.message.message_id
+    message_id = query.message.id
     chat_id = query.message.chat.id
     
     # Construct the URL for the comment thread
