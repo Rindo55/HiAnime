@@ -9,7 +9,7 @@ from jikanpy import Jikan
 import signal
 from io import BytesIO
 import sys
-from db import 
+from db import is_voted, save_vote
 import random
 import base64
 import aiohttp
