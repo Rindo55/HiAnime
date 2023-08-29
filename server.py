@@ -48,14 +48,17 @@ async def handle_message(bot, update):
             if "aniwatch" in update.text:
                 user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
                 user_states[user_id] = 'waiting_punishment_date'
-                await app.send_message(user_id, text="Mention the **date of your punishment.** \n\n`(Note: Number of characters for this query must **not exceed** the limit of **15**)`")
+                await app.send_message(user_id, text="Mention the **date of your punishment.** \n\n(Note: Number of characters for this query must **not exceed** the limit of **15**)")
             else:
                 await app.send_message(user_id, "Send a valid link.")
         if state == 'waiting_punishment_date':
             if len(update.text) <= 15:
-                user_messages[user_id].append(f"**Date of punishment:** {update.text}")
-                user_states[user_id] = 'waiting_appeal'
-                await app.send_message(user_id, "You may now proceed to construct your appeal and send it to me.\n\n`(Note: Number of charcters for this query **must exceed 301** else appeal will be ignored.)`")
+                if any(char.isdigit() for char in message.text):
+                    user_messages[user_id].append(f"**Date of punishment:** {update.text}")
+                    user_states[user_id] = 'waiting_appeal'
+                    await app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**\n\n(Note: Number of characters for this query **must exceed 301** else appeal will be ignored.)")
+                else:
+                    await app.send_message(user_id, "Your date doesn't seem to contain any number. Please send **Date of punishment** again in the below format\n\nxx/xx/xxxx or xx-xx-xxxx
             else: 
                 await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
         if state == 'waiting_appeal':
@@ -68,7 +71,7 @@ async def handle_message(bot, update):
                 del user_states[user_id]
                 del user_messages[user_id]
             else:
-                await app.send_message(user_id, "Number of characters must be above **301** for this query. Send your **appeal again** with **atleast 301 characters.**")
+                await app.send_message(user_id, "Your appeal has been ignored due number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
 
                 
 # Define a function to send the combined message to the channel
