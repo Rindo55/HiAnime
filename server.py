@@ -36,19 +36,12 @@ owner_id = 1443454117
 post_type = "text"
 text = "Hello, world!"
 
-# create the post using the Comments API
-x_url="https://api.comments.bot/%createPost%"
-tgshare = requests.get(x_url, params={"api_key": apiz_key, "owner_id": owner_id, "type": post_type, "text": text})
-uploadxz=tgshare
-# print the result
-print(tgshare)
 
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="👍", callback_data="vote1"),
-            InlineKeyboardButton(text="👎", callback_data="vote2"),
-            InlineKeyboardButton(text="💬", callback_data="comment_thread")
+            InlineKeyboardButton(text="ACCEPT", callback_data="vote1"),
+            InlineKeyboardButton(text="DENY", callback_data="vote2")
         ]
     ]
 )
@@ -96,14 +89,21 @@ async def handle_message(bot, update):
                 del user_states[user_id]
                 del user_messages[user_id]
             else:
-                await app.send_message(user_id, "Your appeal has been ignored due number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
-
+                apl = await app.send_message(user_id, "Your appeal has been ignored due number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
+                rep_id=apl.id
+                untextx = await app.send_message(
+                    chat_id=KAYO_ID,
+                    text="💬**REMARK**",
+                    reply_to_message_id=rep_id
+                )
+                await asyncio.sleep(2)
+                await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
 def get_vote_buttons(a,b):
     buttons = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text=f"👍 {a}", callback_data="vote1"),
-                InlineKeyboardButton(text=f"👎 {b}", callback_data="vote2")
+                InlineKeyboardButton(text=f"ACCEPT {a}", callback_data="vote1"),
+                InlineKeyboardButton(text=f"DENY {b}", callback_data="vote2")
             ]
         ]
     )
@@ -125,11 +125,11 @@ async def votes_(_,query: CallbackQuery):
         b = 0
         for row in x.inline_keyboard:
             for button in row:
-                if button.text.startswith('👍'):
+                if button.text.startswith('ACCEPT'):
                     a_str = button.text[2:].strip()
                     if a_str:
                         a = int(a_str)
-                elif button.text.startswith('👎'):
+                elif button.text.startswith('DENY'):
                     b_str = button.text[2:].strip()
                     if b_str:
                         b = int(b_str)
@@ -144,18 +144,7 @@ async def votes_(_,query: CallbackQuery):
         await save_vote(id,user)
     except Exception as e:
         print(e)
-@app.on_callback_query(filters.regex("comment_thread"))
-async def comment_thread(_, query: CallbackQuery):
-    # Get the message ID and chat ID
-    message_id = query.message.id
-    chat_id = query.message.chat.id
-    
-    # Construct the URL for the comment thread
-    url = f"https://t.me/c/{str(chat_id)[4:]}/{message_id}"
-    
-    # Send the URL to the user
-    await query.answer()
-    await query.message.reply_text(f"Comment thread: {url}")
+
     
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
