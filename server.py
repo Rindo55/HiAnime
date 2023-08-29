@@ -113,9 +113,13 @@ async def votes_(_,query: CallbackQuery):
         for row in x.inline_keyboard:
             for button in row:
                 if button.text.startswith('👍'):
-                    a = int(button.text[2:])
+                    a_str = button.text[2:].strip()
+                    if a_str:
+                        a = int(a_str)
                 elif button.text.startswith('👎'):
-                    b = int(button.text[2:])
+                    b_str = button.text[2:].strip()
+                    if b_str:
+                        b = int(b_str)
         if vote == 1:
             a = a + 1
             buttons = get_vote_buttons(a,b)
@@ -127,7 +131,6 @@ async def votes_(_,query: CallbackQuery):
         await save_vote(id,user)
     except Exception as e:
         print(e)
-        
     
 # Define a function to send the combined message to the channel
 def send_combined_message(user_id):
