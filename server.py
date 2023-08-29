@@ -30,7 +30,6 @@ user_states = {}
 user_messages = {}
 @app.on_callback_query(filters.regex("vote"))
 async def votes_(_,query: CallbackQuery):
-    try:
         id = query.message.message_id
         user = query.from_user.id
         vote = int(query.data.replace("vote","").strip())
