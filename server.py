@@ -79,7 +79,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
-                await app.send_message(ch_id, text=f"User: {mention}\nUser ID: {user_id}\nUser Name: {un}\n\n{combined_message}", reply_markup=VOTE_MARKUP)
+                apl = await app.send_message(ch_id, text=f"User: {mention}\nUser ID: {user_id}\nUser Name: {un}\n\n{combined_message}", reply_markup=VOTE_MARKUP)
                 apl.reply_text("💬**REMARK**", quote=true)
                 await asyncio.sleep(2)
                 await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
