@@ -49,9 +49,6 @@ with app:
 # print the result
 print(result)
 
-    return response.post_id
-
-app.run()
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
