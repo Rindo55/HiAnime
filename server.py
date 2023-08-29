@@ -31,23 +31,16 @@ user_states = {}
 user_messages = {}
 
 # define the required parameters
-api_key = "a33786d60e149cf86e54b4d0af4095b9"
+apiz_key = "a33786d60e149cf86e54b4d0af4095b9"
 owner_id = 1443454117
 post_type = "text"
 text = "Hello, world!"
 
 # create the post using the Comments API
-with app:
-    result = app.send(
-        "createPost",
-        api_key=api_key,
-        owner_id=owner_id,
-        type=post_type,
-        text=text
-    )
-
+uploadxz = requests.post(url="https://api.comments.bot/creatPost", api_key=apiz_key, owner_id=owner_id, type=post_type, text=text).json()
+directlink = uploadxz["result"]
 # print the result
-print(result)
+print(directlink)
 
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
