@@ -51,8 +51,8 @@ def start(bot, update):
 @app.on_message(filters.text)
 async def handle_message(bot, update):
     user_id = update.from_user.id
-    mention = f"@{update.from_user.mention()}"
-    un = update.from_user.username
+    mention = update.from_user.mention()
+    un = f"@{update.from_user.username}"
     if user_id in user_states:
         state = user_states[user_id]
         
@@ -80,13 +80,13 @@ async def handle_message(bot, update):
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
                 await app.send_message(ch_id, text=f"User: {mention}\nUser ID: {user_id}\nUser Name: {un}\n\n{combined_message}", reply_markup=VOTE_MARKUP)
+                apl.reply_text("💬**REMARK**", quote=true)
+                await asyncio.sleep(2)
+                await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
                 del user_states[user_id]
                 del user_messages[user_id]
             else:
                 apl = await app.send_message(user_id, "Your appeal has been ignored due number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
-                apl.reply_text("💬**REMARK**")
-                await asyncio.sleep(2)
-                await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
 def get_vote_buttons(a,b):
     buttons = InlineKeyboardMarkup(
         [
