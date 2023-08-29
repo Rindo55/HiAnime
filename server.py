@@ -44,7 +44,7 @@ async def handle_message(bot, update):
     if user_id in user_states:
         state = user_states[user_id]
         
-        if state == 'waiting_link':
+        if state == 'waiting_link' and "https" in update.text:
             user_messages[user_id].append(f"AniWatch Profile Link: {update.text}")
             user_states[user_id] = 'waiting_punishment_date'
             
