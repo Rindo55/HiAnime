@@ -1,7 +1,6 @@
 import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
-from config import MONGO_DB_URI
-
+MONGO_DB_URL="mongodb+srv://bleach:x265@cluster0.g7qvfa0.mongodb.net/?retryWrites=true&w=majority"
 print("[INFO]: STARTING MONGO DB CLIENT")
 mongo_client = MongoClient(MONGO_DB_URI)
 db = mongo_client.autoani
