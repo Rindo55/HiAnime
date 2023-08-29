@@ -30,7 +30,28 @@ async def timeoutz_message(chat_id):
 user_states = {}
 user_messages = {}
 
+# define the required parameters
+api_key = "a33786d60e149cf86e54b4d0af4095b9"
+owner_id = 1443454117
+post_type = "text"
+text = "Hello, world!"
 
+# create the post using the Comments API
+with app:
+    result = app.send(
+        "createPost",
+        api_key=api_key,
+        owner_id=owner_id,
+        type=post_type,
+        text=text
+    )
+
+# print the result
+print(result)
+
+    return response.post_id
+
+app.run()
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
