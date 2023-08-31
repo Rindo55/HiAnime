@@ -104,7 +104,8 @@ async def votes_(_, query: CallbackQuery):
     try:
         id = query.message.id
         user = query.from_user.id
-        jar = app.get_messages(ch_id, id)
+        chx_id = -1001894461368
+        jar = app.get_messages(chx_id, id)
         lines = jar.split("\n")
         usid = lines[1].split(": ")[1]
         print(usid)
