@@ -79,7 +79,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
-                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** {user_id}\n**User Name:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: To be reviewed ⚠️", reply_markup=VOTE_MARKUP)
+                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** {user_id}\n**User Name:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True)
                 await apl.reply_text("💬**REMARK**")
                 await asyncio.sleep(2)
                 await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
@@ -134,15 +134,15 @@ async def votes_(_, query: CallbackQuery):
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted.")
-            acx = lmx.replace("To be reviewed⚠️", f"Appeal has been accepted by {men}")
-            await query.message.edit_text(text=acx)
+            acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men}")
+            await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 2:
             b = "✅"
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been denied.")
-            denx =  lmx.replace("To be reviewed⚠️", f"Appeal has been rejected by {men}") 
-            await query.message.edit_text(text=denx)
+            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal rejected by {men}") 
+            await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
         await save_vote(id, user)
     except Exception as e:
         print(e)
