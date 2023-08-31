@@ -155,14 +155,14 @@ async def votes_(_, query: CallbackQuery):
             buttons = get_vote_buttons(a, b, c, d, e)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. Your account has now been unbanned.")
-            acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal instantly accepted by {men}")
+            acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men}")
             await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 2:
             b = "(✅)"
             buttons = get_vote_buttons(a, b, c, d , e)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been denied.")
-            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal instantly rejected by {men}") 
+            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal rejected by {men}") 
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 3:
             c = "(✅)"
