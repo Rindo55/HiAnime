@@ -104,13 +104,13 @@ def get_vote_buttons(a,b,c,d,e):
                 InlineKeyboardButton(text=f"DENY {b}", callback_data="vote2")
             ],
             [
-                InlineKeyboardButton(text="UNBAN (after 15 days) {c}", callback_data="vote3"),
+                InlineKeyboardButton(text=f"UNBAN (after 15 days) {c}", callback_data="vote3"),
             ],
             [
-                InlineKeyboardButton(text="UNBAN (after 20 days) {d}", callback_data="vote4")
+                InlineKeyboardButton(text=f"UNBAN (after 20 days) {d}", callback_data="vote4")
             ],
             [
-                InlineKeyboardButton(text="UNBAN (after 25 days) {e}", callback_data="vote5"),
+                InlineKeyboardButton(text=f"UNBAN (after 25 days) {e}", callback_data="vote5"),
             ]
         ]
     )
@@ -152,7 +152,7 @@ async def votes_(_, query: CallbackQuery):
                         b = int(b_str)
         if vote == 1:
             a = "(✅)"
-            buttons = get_vote_buttons(a, b)
+            buttons = get_vote_buttons(a, b, c, d, e)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. Your account has now been unbanned.")
             acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal instantly accepted by {men}")
