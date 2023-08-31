@@ -33,8 +33,8 @@ user_messages = {}
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="✅ACCEPT", callback_data="vote1"),
-            InlineKeyboardButton(text="❌DENY", callback_data="vote2")
+            InlineKeyboardButton(text="ACCEPT", callback_data="vote1"),
+            InlineKeyboardButton(text="DENY", callback_data="vote2")
         ]
     ]
 )
@@ -79,7 +79,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
-                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** {user_id}\n**User Name:** {un}\n\n{combined_message}", reply_markup=VOTE_MARKUP)
+                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** {user_id}\n**User Name:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: To be reviewed ⚠️", reply_markup=VOTE_MARKUP)
                 await apl.reply_text("💬**REMARK**")
                 await asyncio.sleep(2)
                 await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
@@ -91,8 +91,8 @@ def get_vote_buttons(a,b):
     buttons = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text=f"✅ACCEPT ({a})", callback_data="vote1"),
-                InlineKeyboardButton(text=f"❌DENY ({b})", callback_data="vote2")
+                InlineKeyboardButton(text=f"ACCEPT ({a})", callback_data="vote1"),
+                InlineKeyboardButton(text=f"DENY ({b})", callback_data="vote2")
             ]
         ]
     )
@@ -104,9 +104,11 @@ async def votes_(_, query: CallbackQuery):
     try:
         id = query.message.id
         user = query.from_user.id
+        men = query.from_user.mention()
         chx_id = -1001894461368
         jar = await app.get_messages(chx_id, id)
         print(jar)
+        lmx = jar.text
         usid = jar.text.split("\n")[1].split(": ")[1]
         print(usid)
         vote = int(query.data.replace("vote", "").strip())
@@ -119,24 +121,26 @@ async def votes_(_, query: CallbackQuery):
         b = 0
         for row in x.inline_keyboard:
             for button in row:
-                if button.text.startswith('✅ACCEPT'):
-                    a_str = button.text[8:].strip()
+                if button.text.startswith('ACCEPT'):
+                    a_str = button.text[7:].strip()
                     if a_str:
                         a = int(a_str)
-                elif button.text.startswith('❌DENY'):
-                    b_str = button.text[6:].strip()
+                elif button.text.startswith('DENY'):
+                    b_str = button.text[5:].strip()
                     if b_str:
                         b = int(b_str)
         if vote == 1:
-            a = a + 1
+            a = "✅"
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted.")
+            await lmx.replace("To be reviewed⚠️", f"Appeal has been accepted by {men}") 
         elif vote == 2:
-            b = b + 1
+            b = "✅"
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await query.message.reply_text(chat_id=usid, text="Your appeal has been denied.")
+            await lmx.replace("To be reviewed⚠️", f"Appeal has been rejected by {men}") 
         await save_vote(id, user)
     except Exception as e:
         print(e)
