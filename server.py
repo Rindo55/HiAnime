@@ -49,7 +49,7 @@ VOTE_MARKUP = InlineKeyboardMarkup(
 )
 
 # Define a function to handle the /start command
-@app.on_message(filters.command('/start appeal'))
+@app.on_message(filters.regex('/start appeal'))
 def start(bot, update):
     user_id = update.from_user.id
     user_states[user_id] = 'waiting_link'
