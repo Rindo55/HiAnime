@@ -88,7 +88,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
-                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** {user_id}\n**User Name:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True)
+                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** `{user_id}`\n**Username:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True)
                 await apl.reply_text("💬**REMARK**")
                 await asyncio.sleep(2)
                 await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
@@ -122,6 +122,7 @@ async def votes_(_, query: CallbackQuery):
     try:
         id = query.message.id
         user = query.from_user.id
+        uname = query.from_user.first_name
         men = query.from_user.mention()
         chx_id = -1001894461368
         jar = await app.get_messages(chx_id, id)
@@ -132,7 +133,7 @@ async def votes_(_, query: CallbackQuery):
         vote = int(query.data.replace("vote", "").strip())
         is_vote = await is_voted(id, user)
         if is_vote == 1:
-            return await query.answer("Decision has already been made.")
+            return await (f"Appeal has already been reviewed by {uname}.")
         await query.answer()
         x = query.message.reply_markup
         a = ""
