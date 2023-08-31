@@ -35,6 +35,15 @@ VOTE_MARKUP = InlineKeyboardMarkup(
         [
             InlineKeyboardButton(text="ACCEPT", callback_data="vote1"),
             InlineKeyboardButton(text="DENY", callback_data="vote2")
+        ],
+        [
+            InlineKeyboardButton(text="UNBAN (after 15 days)", callback_data="vote3"),
+        ],
+        [
+            InlineKeyboardButton(text="UNBAN (after 20 days)", callback_data="vote4"),
+        ],
+        [
+            InlineKeyboardButton(text="UNBAN (after 25 days)", callback_data="vote5"),
         ]
     ]
 )
@@ -86,13 +95,22 @@ async def handle_message(bot, update):
                 del user_states[user_id]
                 del user_messages[user_id]
             else:
-                apl = await app.send_message(user_id, "Your appeal has been ignored due number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
-def get_vote_buttons(a,b):
+                apl = await app.send_message(user_id, "Your appeal has been ignored due to number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
+def get_vote_buttons(a,b,c,d,e):
     buttons = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text=f"ACCEPT ({a})", callback_data="vote1"),
-                InlineKeyboardButton(text=f"DENY ({b})", callback_data="vote2")
+                InlineKeyboardButton(text=f"ACCEPT {a}", callback_data="vote1"),
+                InlineKeyboardButton(text=f"DENY {b}", callback_data="vote2")
+            ],
+            [
+                InlineKeyboardButton(text="UNBAN (after 15 days) {c}", callback_data="vote3"),
+            ],
+            [
+                InlineKeyboardButton(text="UNBAN (after 20 days) {d}", callback_data="vote4")
+            ],
+            [
+                InlineKeyboardButton(text="UNBAN (after 25 days) {e}", callback_data="vote5"),
             ]
         ]
     )
@@ -117,8 +135,11 @@ async def votes_(_, query: CallbackQuery):
             return await query.answer("Decision has already been made.")
         await query.answer()
         x = query.message.reply_markup
-        a = 0
-        b = 0
+        a = ""
+        b = ""
+        c = ""
+        d = ""
+        e = ""
         for row in x.inline_keyboard:
             for button in row:
                 if button.text.startswith('ACCEPT'):
@@ -130,18 +151,39 @@ async def votes_(_, query: CallbackQuery):
                     if b_str:
                         b = int(b_str)
         if vote == 1:
-            a = "✅"
+            a = "(✅)"
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
-            await app.send_message(chat_id=usid, text="Your appeal has been accepted.")
-            acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men}")
+            await app.send_message(chat_id=usid, text="Your appeal has been accepted. Your account has now been unbanned.")
+            acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal instantly accepted by {men}")
             await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 2:
-            b = "✅"
-            buttons = get_vote_buttons(a, b)
+            b = "(✅)"
+            buttons = get_vote_buttons(a, b, c, d , e)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been denied.")
-            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal rejected by {men}") 
+            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal instantly rejected by {men}") 
+            await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
+        elif vote == 3:
+            c = "(✅)"
+            buttons = get_vote_buttons(a, b, c, d , e)
+            await query.message.edit_reply_markup(reply_markup=buttons)
+            await app.send_message(chat_id=usid, text="Your appeal has been accepted. However, after reviewing your actions it has been decided that your account will only be unbanned after a period of 15 days.")
+            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | unban after 15 days")
+            await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
+        elif vote == 4:
+            d = "(✅)"
+            buttons = get_vote_buttons(a, b, c, d , e)
+            await query.message.edit_reply_markup(reply_markup=buttons)
+            await app.send_message(chat_id=usid, text="Your appeal has been accepted. However, after reviewing your actions it has been decided that your account will only be unbanned after a period of 20 days.")
+            denx =  lmx.replace("⚠️ | To be reviewed",f"✅ | Appeal accepted by {men} | unban after 20 days")
+            await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
+        elif vote == 5:
+            e = "(✅)"
+            buttons = get_vote_buttons(a, b, c, d , e)
+            await query.message.edit_reply_markup(reply_markup=buttons)
+            await app.send_message(chat_id=usid, text="Your appeal has been accepted. However, after reviewing your actions it has been decided that your account will only be unbanned after a period of 25 days.")
+            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | unban after 25 days") 
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
         await save_vote(id, user)
     except Exception as e:
