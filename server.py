@@ -134,13 +134,15 @@ async def votes_(_, query: CallbackQuery):
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted.")
-            await lmx.replace("To be reviewed⚠️", f"Appeal has been accepted by {men}") 
+            acx = lmx.replace("To be reviewed⚠️", f"Appeal has been accepted by {men}")
+            await query.message.edit_text(text=acx)
         elif vote == 2:
             b = "✅"
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await query.message.reply_text(chat_id=usid, text="Your appeal has been denied.")
-            await lmx.replace("To be reviewed⚠️", f"Appeal has been rejected by {men}") 
+            denx =  lmx.replace("To be reviewed⚠️", f"Appeal has been rejected by {men}") 
+            await query.message.edit_text(text=denx)
         await save_vote(id, user)
     except Exception as e:
         print(e)
