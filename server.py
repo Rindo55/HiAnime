@@ -140,7 +140,7 @@ async def votes_(_, query: CallbackQuery):
             b = "✅"
             buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
-            await query.message.reply_text(chat_id=usid, text="Your appeal has been denied.")
+            await app.send_message(chat_id=usid, text="Your appeal has been denied.")
             denx =  lmx.replace("To be reviewed⚠️", f"Appeal has been rejected by {men}") 
             await query.message.edit_text(text=denx)
         await save_vote(id, user)
