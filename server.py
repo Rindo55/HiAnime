@@ -100,14 +100,18 @@ def get_vote_buttons(a,b):
 
     
 @app.on_callback_query(filters.regex("vote"))
-async def votes_(_,query: CallbackQuery):
+async def votes_(_, query: CallbackQuery):
     try:
         id = query.message.id
         user = query.from_user.id
-        vote = int(query.data.replace("vote","").strip())
-        is_vote = await is_voted(id,user)
+        jar = app.get_messages(message.chat.id, id)
+        lines = jar.split("\n")
+        usid = lines[1].split(": ")[1]
+        print(usid)
+        vote = int(query.data.replace("vote", "").strip())
+        is_vote = await is_voted(id, user)
         if is_vote == 1:
-            return await query.answer("You've already voted. You can't vote again.")
+            return await query.answer("Decision has already been made.")
         await query.answer()
         x = query.message.reply_markup
         a = 0
@@ -124,13 +128,15 @@ async def votes_(_,query: CallbackQuery):
                         b = int(b_str)
         if vote == 1:
             a = a + 1
-            buttons = get_vote_buttons(a,b)
+            buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
+            await app.send_message(chat_id=usid, text="Your appeal has been accepted.")
         elif vote == 2:
             b = b + 1
-            buttons = get_vote_buttons(a,b)
+            buttons = get_vote_buttons(a, b)
             await query.message.edit_reply_markup(reply_markup=buttons)
-        await save_vote(id,user)
+            await query.message.reply_text(chat_id=usid, text="Your appeal has been denied.")
+        await save_vote(id, user)
     except Exception as e:
         print(e)
 app.start()
