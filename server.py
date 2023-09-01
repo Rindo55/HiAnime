@@ -39,7 +39,7 @@ def rename_file(client, message):
             message.chat.id,
             file_id=file.file_id,
             file_name=new_file_name_with_extension,
-            reply_to_message_id=message.message_id
+            reply_to_message_id=message.id
         )
     else:
         client.send_message(
