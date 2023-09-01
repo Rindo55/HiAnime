@@ -19,6 +19,33 @@ api_id = 3845818
 api_hash = "95937bcf6bc0938f263fc7ad96959c6d"
 bot_token = "6428443845:AAF9usGZRMRPPMuOfcjClNypt3N_p2_gUZc"
 app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
+@app.on_message(filters.command("rename"))
+def rename_file(client, message):
+    if message.reply_to_message and message.reply_to_message.document:
+        # Get the File object from the reply message (if exists)
+        file = message.reply_to_message.document
+
+        # Get the new file name from the command argument
+        new_file_name = message.text.split(maxsplit=1)[1].strip()
+
+        # Get the file name extension
+        file_extension = file.file_name.split(".")[-1]
+
+        # Generate the new file name with the provided new_file_name and extension
+        new_file_name_with_extension = f"{new_file_name}.{file_extension}"
+
+        # Rename the file by uploading it again with the new file name
+        client.send_document(
+            message.chat.id,
+            file_id=file.file_id,
+            file_name=new_file_name_with_extension,
+            reply_to_message_id=message.message_id
+        )
+    else:
+        client.send_message(
+            message.chat.id,
+            "Please reply to a document to rename it!"
+    )
 user_states = {}
 async def timeout_message(chat_id):
     await asyncio.sleep(300)
