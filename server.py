@@ -35,7 +35,7 @@ def rename_file(client, message):
         new_file_name_with_extension = f"{new_file_name}.{file_extension}"
 
         # Rename the file by uploading it again with the new file name
-        client.send_document(
+        client.send_cached_media(
             message.chat.id,
             file_id=file.file_id,
             file_name=new_file_name_with_extension,
