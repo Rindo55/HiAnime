@@ -133,7 +133,7 @@ async def votes_(_, query: CallbackQuery):
         vote = int(query.data.replace("vote", "").strip())
         is_vote = await is_voted(id, user)
         if is_vote == 1:
-            return await (f"Appeal has already been reviewed by {uname}.")
+            return await query.answer(f"Appeal has already been reviewed by {uname}.")
         await query.answer()
         x = query.message.reply_markup
         a = ""
