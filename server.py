@@ -122,7 +122,7 @@ async def votes_(_, query: CallbackQuery):
     try:
         id = query.message.id
         user = query.from_user.id
-        uname = query.from_user.first_name
+        
         men = query.from_user.mention()
         chx_id = -1001894461368
         jar = await app.get_messages(chx_id, id)
@@ -133,7 +133,7 @@ async def votes_(_, query: CallbackQuery):
         vote = int(query.data.replace("vote", "").strip())
         is_vote = await is_voted(id, user)
         if is_vote == 1:
-            return await query.answer(f"Appeal has already been reviewed by {uname}.")
+            return await query.answer(f"Appeal has already been reviewed.")
         await query.answer()
         x = query.message.reply_markup
         a = ""
