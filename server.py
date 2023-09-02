@@ -19,33 +19,6 @@ api_id = 3845818
 api_hash = "95937bcf6bc0938f263fc7ad96959c6d"
 bot_token = "6428443845:AAF9usGZRMRPPMuOfcjClNypt3N_p2_gUZc"
 app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
-@app.on_message(filters.command("rename"))
-def rename_file(client, message):
-    if message.reply_to_message and message.reply_to_message.document:
-        # Get the File object from the reply message (if exists)
-        file = message.reply_to_message.document
-
-        # Get the new file name from the command argument
-        new_file_name = message.text.split(maxsplit=1)[1].strip()
-
-        # Get the file name extension
-        file_extension = file.file_name.split(".")[-1]
-
-        # Generate the new file name with the provided new_file_name and extension
-        new_file_name_with_extension = f"{new_file_name}.{file_extension}"
-
-        # Rename the file by uploading it again with the new file name
-        client.send_cached_media(
-            message.chat.id,
-            file_id=file.file_id,
-            file_name=new_file_name_with_extension,
-            reply_to_message_id=message.id
-        )
-    else:
-        client.send_message(
-            message.chat.id,
-            "Please reply to a document to rename it!"
-    )
 user_states = {}
 async def timeout_message(chat_id):
     await asyncio.sleep(300)
@@ -90,8 +63,13 @@ VOTE_MARKUP = InlineKeyboardMarkup(
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
+    rs_cmd = int(usr_cmd.split("_")[-1])
     if usr_cmd == "/start":
         await cmd.reply_text("**Hey! I am an appeal bot serving for aniwatch.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
+    elif usr_cmd.split("_", 1)[0] == "/start user":
+        use_id = cmd.from_user.id
+        xc_id=int(usr_cmd.split("_")[-1])
+        await app.send_message(use_id, "**Send me the message you want me to forward to ")
     elif usr_cmd == "/start appeal":
         user_id = cmd.from_user.id
         user_states[user_id] = 'waiting_link'
@@ -234,7 +212,7 @@ async def votes_(_, query: CallbackQuery):
         elif vote == 6:
             f = "(✅)"
             buttons = get_vote_buttons(a, b, c, d , e, f)
-            await query.answer(url="t.me/AniWatchAppealBot?start=appeal")
+            await query.answer(url=f"t.me/AniWatchAppealBot?start=user_{usid}")
             await query.answer()
             await query.message.edit_reply_markup(reply_markup=buttons)
             denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | manually reviewed") 
