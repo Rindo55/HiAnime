@@ -63,7 +63,6 @@ VOTE_MARKUP = InlineKeyboardMarkup(
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
-    rs_cmd = int(usr_cmd.split("_")[-1])
     if usr_cmd == "/start":
         await cmd.reply_text("**Hey! I am an appeal bot serving for aniwatch.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
     elif usr_cmd.split("_", 1)[0] == "/start user":
