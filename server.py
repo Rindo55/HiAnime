@@ -67,9 +67,12 @@ async def start(bot, cmd: Message):
     if usr_cmd == "/start":
         await cmd.reply_text("**Hey! I am an appeal bot serving for aniwatch.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
     elif usr_cmd.split("_", 1)[0] == "/start user":
+        user_states[user_id] = 'send_link'
         use_id = cmd.from_user.id
         xc_id=int(usr_cmd.split("_")[-1])
-        await app.send_message(use_id, "**Send me the message you want me to forward to ")
+        ment = app.get_users(xc_id).mention()
+        await app.send_message(use_id, f"**Send me the message you want me to forward to** {ment}")
+        
     elif usr_cmd == "/start appeal":
         user_id = cmd.from_user.id
         user_states[user_id] = 'waiting_link'
@@ -84,7 +87,13 @@ async def handle_message(bot, update):
     un = f"@{update.from_user.username}"
     if user_id in user_states:
         state = user_states[user_id]
-        
+        if state == 'send_link':
+            ert = update.message.id
+            await app.forward_messages(
+                chat_id=xc_id,
+                from_chat_id=message.chat.id,
+                message_ids=ert
+            )
         if state == 'waiting_link':
             if "http" in update.text:
                 user_messages[user_id].append(f"**AniWatch Profile Link:** {update.text}")
