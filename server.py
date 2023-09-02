@@ -235,7 +235,7 @@ async def votes_(_, query: CallbackQuery):
         elif vote == 6:
             f = "(✅)"
             buttons = get_vote_buttons(a, b, c, d , e, f)
-            await query.answer(url="http://t.me/aniwatchappealbot?start=appeal")
+            await query.answer(url="t.me/aniwatchappealbot?start=appeal")
             await query.message.edit_reply_markup(reply_markup=buttons)
             denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | manually reviewed") 
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
