@@ -71,8 +71,7 @@ async def start(bot, cmd: Message):
         xc_id=int(usr_cmd.split("_")[-1])
         userxd = await app.get_users(xc_id)
         usrc = userxd.mention()
-        tlu = await app.send_message(user_id, f"**Send me the message you want me to forward to** {usrc} ({xc_id})")
-        await tlu.edit_text(f"**Send me the message you want me to forward to** {usrc} ({xc_id})\nID: {tlu.id}")
+        tlu = await app.send_message(user_id, f"**Send me the message you want me to forward to** {usrc}\n USER ID: {xc_id}")
         
     elif usr_cmd == "/start appeal":
         user_id = cmd.from_user.id
@@ -91,11 +90,13 @@ async def handle_message(bot, update):
         if state == 'send_link':
             ert = update.id
             taku = int(ert) - 1
+            usm = taku.text.split("\n")[1].split(": ")[1]
+            wru = int(usm)
             jr = await app.get_messages(user_id, taku)
             test = jr.text
             print(test)
             await app.forward_messages(
-                chat_id=xc_id,
+                chat_id=wru,
                 from_chat_id=user_id,
                 message_ids=ert
             )
