@@ -91,7 +91,8 @@ async def handle_message(bot, update):
         if state == 'send_link':
             ert = update.id
             taku = int(ert) - 1
-            test = taku.text
+            jr = await app.get_messages(user_id, taku)
+            test = jr.text
             print(test)
             await app.forward_messages(
                 chat_id=xc_id,
