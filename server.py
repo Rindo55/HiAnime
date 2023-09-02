@@ -88,7 +88,7 @@ async def handle_message(bot, update):
     if user_id in user_states:
         state = user_states[user_id]
         if state == 'send_link':
-            ert = update.message.id
+            ert = update.id
             await app.forward_messages(
                 chat_id=xc_id,
                 from_chat_id=message.chat.id,
