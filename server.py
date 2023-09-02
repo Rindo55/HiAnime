@@ -66,8 +66,8 @@ async def start(bot, cmd: Message):
     if usr_cmd == "/start":
         await cmd.reply_text("**Hey! I am an appeal bot serving for aniwatch.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
     elif usr_cmd.split("_", 1)[0] == "/start user":
+        user_id = cmd.from_user.id
         user_states[user_id] = 'send_link'
-        use_id = cmd.from_user.id
         xc_id=int(usr_cmd.split("_")[-1])
         ment = app.get_users(xc_id).mention()
         await app.send_message(use_id, f"**Send me the message you want me to forward to** {ment}")
