@@ -65,7 +65,7 @@ async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     if usr_cmd == "/start":
         await cmd.reply_text("**Hey! I am an appeal bot serving for aniwatch.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
-    elif usr_cmd.split("_", 1)[0] == "/start user":
+    elif cmd.split("_", 1)[0] == "/start user":
         user_id = cmd.from_user.id
         user_states[user_id] = 'send_link'
         xc_id=int(usr_cmd.split("_")[-1])
