@@ -81,7 +81,7 @@ VOTE_MARKUP = InlineKeyboardMarkup(
             InlineKeyboardButton(text="UNBAN (after 25 days)", callback_data="vote5"),
         ],
         [
-            InlineKeyboardButton(text="MANUALLY REVIEW", callback_data="vote5"),
+            InlineKeyboardButton(text="MANUALLY REVIEW", callback_data="vote6"),
         ]
     ]
 )
