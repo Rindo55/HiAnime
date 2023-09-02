@@ -239,8 +239,9 @@ async def votes_(_, query: CallbackQuery):
             denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | manually reviewed") 
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
             await app.answer_callback_query(
-                callback_query.id, 
-                url="http://t.me/aniwatchappealbot?start=appeal",
+                query.id, 
+                url="t.me/aniwatchappealbot?start=appeal",
+                show_alert=True
             )
         await save_vote(id, user)
     except Exception as e:
