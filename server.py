@@ -69,7 +69,7 @@ async def start(bot, cmd: Message):
         user_id = cmd.from_user.id
         user_states[user_id] = 'send_link'
         xc_id=int(usr_cmd.split("_")[-1])
-        userxd = app.get_users(xc_id)
+        userxd = await app.get_users(xc_id)
         usrc = userxd.mention()
         await app.send_message(user_id, f"**Send me the message you want me to forward to** {usrc}")
         
