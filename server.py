@@ -153,7 +153,7 @@ def get_vote_buttons(a,b,c,d,e):
             ],
             [
                 InlineKeyboardButton(text=f"UNBAN (after 25 days) {e}", callback_data="vote5"),
-            ]
+            ],
             [
                 InlineKeyboardButton(text=f"MANUALLY REVIEW  {f}", callback_data="vote6"),
             ]
