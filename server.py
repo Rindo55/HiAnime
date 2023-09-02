@@ -57,6 +57,14 @@ async def timeoutz_message(chat_id):
 user_states = {}
 user_messages = {}
 
+START_MARKUP = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(text="Create an appeal", url="https://t.me/aniwatchappealbot?start=appeal"),
+        ]
+    ]
+)
+
 VOTE_MARKUP = InlineKeyboardMarkup(
     [
         [
@@ -71,6 +79,9 @@ VOTE_MARKUP = InlineKeyboardMarkup(
         ],
         [
             InlineKeyboardButton(text="UNBAN (after 25 days)", callback_data="vote5"),
+        ],
+        [
+            InlineKeyboardButton(text="MANUALLY REVIEW", callback_data="vote5"),
         ]
     ]
 )
@@ -80,8 +91,8 @@ VOTE_MARKUP = InlineKeyboardMarkup(
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     if usr_cmd == "/start":
-        await cmd.reply_text("Bot seems online! ⚡️")
-    else:
+        await cmd.reply_text("**Hey! I am an appeal bot serving for aniwatch.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
+    elif usr_cmd == "/start appeal":
         user_id = cmd.from_user.id
         user_states[user_id] = 'waiting_link'
         user_messages[user_id] = []  # Initialize an empty list for user messages
@@ -143,6 +154,9 @@ def get_vote_buttons(a,b,c,d,e):
             [
                 InlineKeyboardButton(text=f"UNBAN (after 25 days) {e}", callback_data="vote5"),
             ]
+            [
+                InlineKeyboardButton(text=f"MANUALLY REVIEW  {f}", callback_data="vote6"),
+            ]
         ]
     )
     return buttons
@@ -172,6 +186,7 @@ async def votes_(_, query: CallbackQuery):
         c = ""
         d = ""
         e = ""
+        f = ""
         for row in x.inline_keyboard:
             for button in row:
                 if button.text.startswith('ACCEPT'):
@@ -184,39 +199,46 @@ async def votes_(_, query: CallbackQuery):
                         b = int(b_str)
         if vote == 1:
             a = "(✅)"
-            buttons = get_vote_buttons(a, b, c, d, e)
+            buttons = get_vote_buttons(a, b, c, d, e, f)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. Your account has now been unbanned.")
             acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men}")
             await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 2:
             b = "(✅)"
-            buttons = get_vote_buttons(a, b, c, d , e)
+            buttons = get_vote_buttons(a, b, c, d , e, f)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been denied.")
             denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal rejected by {men}") 
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 3:
             c = "(✅)"
-            buttons = get_vote_buttons(a, b, c, d , e)
+            buttons = get_vote_buttons(a, b, c, d , e, f)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. However, after reviewing your actions it has been decided that your account will only be unbanned after a period of 15 days.")
             denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | unban after 15 days")
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 4:
             d = "(✅)"
-            buttons = get_vote_buttons(a, b, c, d , e)
+            buttons = get_vote_buttons(a, b, c, d , e, f)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. However, after reviewing your actions it has been decided that your account will only be unbanned after a period of 20 days.")
             denx =  lmx.replace("⚠️ | To be reviewed",f"✅ | Appeal accepted by {men} | unban after 20 days")
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
         elif vote == 5:
             e = "(✅)"
-            buttons = get_vote_buttons(a, b, c, d , e)
+            buttons = get_vote_buttons(a, b, c, d , e, f)
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. However, after reviewing your actions it has been decided that your account will only be unbanned after a period of 25 days.")
             denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | unban after 25 days") 
             await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
+        elif vote == 6:
+            e = "(✅)"
+            buttons = get_vote_buttons(a, b, c, d , e, f)
+            await query.message.edit_reply_markup(reply_markup=buttons)
+            denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | manually reviewed") 
+            await query.message.edit_text(text=denx, reply_markup=buttons, disable_web_page_preview=True)
+            await query.answer(url="http://t.me/aniwatchappealbot?start=appeal", show_alert=True)
         await save_vote(id, user)
     except Exception as e:
         print(e)
