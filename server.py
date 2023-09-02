@@ -82,7 +82,7 @@ async def start(bot, cmd: Message):
     if usr_cmd == "/start":
        await cmd.reply_text("Bot seems online! ⚡️")
     else:
-        def start(bot, update):
+        def startx(bot, update):
             user_id = update.from_user.id
             user_states[user_id] = 'waiting_link'
             user_messages[user_id] = []  # Initialize an empty list for user messages
