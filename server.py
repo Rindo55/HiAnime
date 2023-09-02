@@ -72,7 +72,7 @@ async def start(bot, cmd: Message):
         userxd = await app.get_users(xc_id)
         usrc = userxd.mention()
         tlu = await app.send_message(user_id, f"**Send me the message you want me to forward to** {usrc} ({xc_id})")
-        await tlu.edit_text("**Send me the message you want me to forward to** {usrc} ({xc_id})\nID: {tlu.id}")
+        await tlu.edit_text(f"**Send me the message you want me to forward to** {usrc} ({xc_id})\nID: {tlu.id}")
         
     elif usr_cmd == "/start appeal":
         user_id = cmd.from_user.id
