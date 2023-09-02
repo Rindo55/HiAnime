@@ -77,16 +77,15 @@ VOTE_MARKUP = InlineKeyboardMarkup(
 
 # Define a function to handle the /start command
 @app.on_message(filters.command("start") & filters.private)
-async def start(bot, cmd: Message):
+async def start(bot, cmd: Message, update):
     usr_cmd = cmd.text.split("_", 1)[-1]
     if usr_cmd == "/start":
        await cmd.reply_text("Bot seems online! ⚡️")
     else:
-        def startx(bot, update):
-            user_id = update.from_user.id
-            user_states[user_id] = 'waiting_link'
-            user_messages[user_id] = []  # Initialize an empty list for user messages
-            app.send_message(user_id, "State your **AniWatch profile link.**")
+        user_id = update.from_user.id
+        user_states[user_id] = 'waiting_link'
+        user_messages[user_id] = []  # Initialize an empty list for user messages
+        await app.send_message(user_id, "State your **AniWatch profile link.**")
 
 # Define a function to handle user messages
 @app.on_message(filters.text)
