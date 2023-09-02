@@ -138,7 +138,7 @@ async def handle_message(bot, update):
                 del user_messages[user_id]
             else:
                 apl = await app.send_message(user_id, "Your appeal has been ignored due to number character being less than 301. Send your **appeal again** with minimum of **301 characters.**")
-def get_vote_buttons(a,b,c,d,e):
+def get_vote_buttons(a,b,c,d,e,f):
     buttons = InlineKeyboardMarkup(
         [
             [
