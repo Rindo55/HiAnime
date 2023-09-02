@@ -90,11 +90,9 @@ async def handle_message(bot, update):
         if state == 'send_link':
             ert = update.id
             taku = int(ert) - 1
-            usm = taku.text.split("\n")[1].split(": ")[1]
+            tax = await app.get_messages(user_id, taku)
+            usm = tax.text.split("\n")[1].split(": ")[1]
             wru = int(usm)
-            jr = await app.get_messages(user_id, taku)
-            test = jr.text
-            print(test)
             await app.forward_messages(
                 chat_id=wru,
                 from_chat_id=user_id,
