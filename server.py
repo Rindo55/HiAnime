@@ -89,7 +89,7 @@ async def handle_message(bot, update):
             tax = await app.get_messages(user_id, taku)
             usm = tax.text.split("\n")[1].split(": ")[1]
             wru = int(usm)
-            await app.forward_messages(
+            await app.copy_message(
                 chat_id=wru,
                 from_chat_id=user_id,
                 message_ids=ert
