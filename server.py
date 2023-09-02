@@ -45,13 +45,9 @@ VOTE_MARKUP = InlineKeyboardMarkup(
             InlineKeyboardButton(text="DENY", callback_data="vote2")
         ],
         [
-            InlineKeyboardButton(text="UNBAN (after 15 days)", callback_data="vote3"),
-        ],
-        [
-            InlineKeyboardButton(text="UNBAN (after 20 days)", callback_data="vote4"),
-        ],
-        [
-            InlineKeyboardButton(text="UNBAN (after 25 days)", callback_data="vote5"),
+            InlineKeyboardButton(text="🔨15d", callback_data="vote3"),
+            InlineKeyboardButton(text="🔨20d", callback_data="vote4"),
+            InlineKeyboardButton(text="🔨25d", callback_data="vote5")
         ],
         [
             InlineKeyboardButton(text="MANUALLY REVIEW", callback_data="vote6"),
@@ -137,13 +133,9 @@ def get_vote_buttons(a,b,c,d,e,f):
                 InlineKeyboardButton(text=f"DENY {b}", callback_data="vote2")
             ],
             [
-                InlineKeyboardButton(text=f"UNBAN (after 15 days) {c}", callback_data="vote3"),
-            ],
-            [
-                InlineKeyboardButton(text=f"UNBAN (after 20 days) {d}", callback_data="vote4")
-            ],
-            [
-                InlineKeyboardButton(text=f"UNBAN (after 25 days) {e}", callback_data="vote5"),
+                InlineKeyboardButton(text=f"🔨15d {c}", callback_data="vote3"),
+                InlineKeyboardButton(text=f"🔨20d {d}", callback_data="vote4"),
+                InlineKeyboardButton(text=f"🔨25d {e}", callback_data="vote5"),
             ],
             [
                 InlineKeyboardButton(text=f"MANUALLY REVIEW  {f}", callback_data="vote6"),
