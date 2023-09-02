@@ -92,7 +92,7 @@ async def handle_message(bot, update):
             await app.copy_message(
                 chat_id=wru,
                 from_chat_id=user_id,
-                message_ids=ert
+                message_id=ert
             )
         if state == 'waiting_link':
             if "http" in update.text:
