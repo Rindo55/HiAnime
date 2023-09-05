@@ -117,7 +117,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
-                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** `{user_id}`\n**Username:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
+                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** `{user_id}`\n**Username:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True, parse_mode=enums.MARKDOWN)
                 await apl.reply_text("💬**REMARK**")
                 await asyncio.sleep(2)
                 await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
@@ -185,7 +185,7 @@ async def votes_(_, query: CallbackQuery):
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. Your account has now been unbanned.")
             acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men}")
-            await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
+            await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True, parse_mode=enums.ParseMode.MARKDOWN)
         elif vote == 2:
             b = "(✅)"
             buttons = get_vote_buttons(a, b, c, d , e, f)
