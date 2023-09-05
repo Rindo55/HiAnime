@@ -96,15 +96,15 @@ async def handle_message(bot, update):
             )
         if state == 'waiting_link':
             if "http" in update.text:
-                user_messages[user_id].append(f"**AniWatch Profile Link:** {update.text}")
+                user_messages[user_id].append(f"<b>AniWatch Profile Link:</b> {update.text}")
                 user_states[user_id] = 'waiting_punishment_date'
-                await app.send_message(user_id, text="Mention the **date of your punishment.** \n\n(Note: Number of characters for this query must **not exceed** the limit of **15**)")
+                await app.send_message(user_id, text="Mention the <b>date of your punishment.</b> \n\n(Note: Number of characters for this query must **not exceed** the limit of **15**)")
             else:
                 await app.send_message(user_id, "Send a valid link.")
         if state == 'waiting_punishment_date':
             if len(update.text) <= 15:
                 if any(char.isdigit() for char in update.text):
-                    user_messages[user_id].append(f"**Date of punishment:** {update.text}")
+                    user_messages[user_id].append(f"<b>Date of punishment:</b> {update.text}")
                     user_states[user_id] = 'waiting_appeal'
                     await app.send_message(user_id, "**You may now proceed to construct your appeal and send it to me.**\n\n(Note: Number of characters for this query **must exceed 301** else appeal will be ignored.)")
                 else:
@@ -113,11 +113,11 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Characters must not exceed above 15 for this query. Send your **Date of punishment** again within 15 characters.")
         if state == 'waiting_appeal':
             if len(update.text) > 301:
-                user_messages[user_id].append(f"**Appeal:** {update.text}")
+                user_messages[user_id].append(f"<b>Appeal:</b> {update.text}")
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
-                apl = await app.send_message(ch_id, text=f"**User:** {mention}\n**User ID:** `{user_id}`\n**Username:** {un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n**Status**: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True, parse_mode=enums.ParseMode.MARKDOWN)
+                apl = await app.send_message(ch_id, text=f"<b>User:</b> {mention}\n<b>User ID:</b> <code>{user_id}</code>\n<b>Username:</b>{un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n<b>Status</b>: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
                 await apl.reply_text("💬**REMARK**")
                 await asyncio.sleep(2)
                 await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
@@ -185,7 +185,7 @@ async def votes_(_, query: CallbackQuery):
             await query.message.edit_reply_markup(reply_markup=buttons)
             await app.send_message(chat_id=usid, text="Your appeal has been accepted. Your account has now been unbanned.")
             acx = lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men}")
-            await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True, parse_mode=enums.ParseMode.MARKDOWN)
+            await query.message.edit_text(text=acx, reply_markup=buttons, disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
         elif vote == 2:
             b = "(✅)"
             buttons = get_vote_buttons(a, b, c, d , e, f)
