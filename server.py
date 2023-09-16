@@ -108,11 +108,35 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 • __Appeals for alternative accounts are not accepted.__
 
 • __Attempting to get your friend's punishment lifted will get you the same punishment, if they want to appeal they will have to follow these steps.__"""
-    post_5 = await app.get_messages(apx_id, 7)
-    post_6 = await app.get_messages(apx_id, 9)
-    post_7 = await app.get_messages(apx_id, 10)
-    post_8 = await app.get_messages(apx_id, 11)
-    post_9 = await app.get_messages(apx_id, 12)
+    post_5 = f"""**3. Staff Contact**
+
+• __Once you are prepared to create an appeal, you may react to the <b><u>Button</b></u> connected to this embed.__
+
+• __The <b>@AniWatchAppealBot</b> bot shall DM you, you may now select the <u>APPEAL</u> form placed in the bot embed and <u>follow the instructions</u> that has been stated throughout the procedures accordingly.__
+
+• __<b>DO NOT spam or conduct any similar actions using the appeal system, it may result in your appeal being rejected without even being considered and be result to moderative actions at certain cases.</b>__"""
+    post_6 = f"""**4. Waiting period**
+
+• __You are to await the judgment for the least of <b><u>7 Days</b></u> in respect to the reviewal process by the Community Mods & Community Admins. Once you have submitted the Appeal, @AniWatchAppealBot will notify you whether if the Appeal is accepted or rejected.__
+
+• __In the event that you have not received a response from the designated appeal field with which you have created the appeal, it is advisable to initiate a "Direct Message" with a Community Mod to follow up. However, if you continue to encounter a lack of response, it is probable that your appeal has been declined.__"""
+    post_7 = f"""
+Appeal stuff
+**5. Unban**
+
+• __If your appeal has been accepted by the staff team, a Community Mod or perhaps a Community Admin shall DM you stating your wait period for an unban. If your account is still banned after the wait period, you may kindly remind the designated <b>Community Staff</b> to unban your account by DMing them.__"""
+    post_8 = f"""**6. Respect Staff Judgement**
+
+• __The staff judgements are at all times respective towards the appeals and the user is to obey the decisions made.__
+
+• __If the user is to not accept the judgment and seen requesting constantly for an unban, before the time allocated, the punishment shall be extended to a much prolonged period of time.__"""
+    post_9 = f"""**⚠️ Important ⚠️**
+
+**This is a public warning to everyone wanting to Appeal their ban on** `AniWatch`. Once you make an appeal, you agree with the `AniWatch Community Guidelines`.
+
+• __Do note that appeals in an attempt at an unban for the second time due to the repeating of a major rulebreak after an initial unban shall not in any case be accepted or considered.__
+
+• __Thus you are strictly warned to not repeat any of a rulebreak after an unban as another appeal from the same user at another time is considered to be unauthentic and therefore nulled.__"""
     await cmd.reply_text(post_1)
     await cmd.reply_text(post_2)
     await cmd.reply_text(post_3)
