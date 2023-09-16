@@ -55,6 +55,20 @@ VOTE_MARKUP = InlineKeyboardMarkup(
     ]
 )
 
+@app.on_message(filters.command("send"))
+async def start(bot, cmd: Message):
+    mfg_id=cmd.id
+    apx_id=-1001811950874
+    post_1 = await app.get_messages(apx_id, 3)
+    post_2 = await app.get_messages(apx_id, 4)
+    post_3 = await app.get_messages(apx_id, 5)
+    post_4 = await app.get_messages(apx_id, 6)
+    post_5 = await app.get_messages(apx_id, 7)
+    post_6 = await app.get_messages(apx_id, 9)
+    post_7 = await app.get_messages(apx_id, 10)
+    post_8 = await app.get_messages(apx_id, 11)
+    post_9 = await app.get_messages(apx_id, 12)
+    send1 = await cmd.reply_photo(post_1)
 # Define a function to handle the /start command
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
