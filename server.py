@@ -137,7 +137,7 @@ Appeal stuff
 • __Do note that appeals in an attempt at an unban for the second time due to the repeating of a major rulebreak after an initial unban shall not in any case be accepted or considered.__
 
 • __Thus you are strictly warned to not repeat any of a rulebreak after an unban as another appeal from the same user at another time is considered to be unauthentic and therefore nulled.__"""
-    await cmd.reply_text(post_1)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/be7367d62fc78ca9b0668.jpg", caption=post_1)
     await cmd.reply_text(post_2)
     await cmd.reply_text(post_3)
     await cmd.reply_text(post_4)
