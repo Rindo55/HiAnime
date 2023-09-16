@@ -129,7 +129,6 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 
 • __In the event that you have not received a response from the designated appeal field with which you have created the appeal, it is advisable to initiate a "Direct Message" with a Community Mod to follow up. However, if you continue to encounter a lack of response, it is probable that your appeal has been declined.__"""
     post_7 = f"""
-Appeal stuff
 **5. Unban**
 
 • __If your appeal has been accepted by the staff team, a Community Mod or perhaps a Community Admin shall DM you stating your wait period for an unban. If your account is still banned after the wait period, you may kindly remind the designated <b>Community Staff</b> to unban your account by DMing them.__"""
@@ -153,7 +152,7 @@ Appeal stuff
     await cmd.reply_photo(photo="https://te.legra.ph/file/105862c3095e0c186f941.jpg", caption=post_6)
     await cmd.reply_photo(photo="https://te.legra.ph/file/e48f84d2b164c25837e0b.jpg", caption=post_7)
     await cmd.reply_photo(photo="https://te.legra.ph/file/6bb208b15263d177e76e8.jpg", caption=post_8)
-    await cmd.reply_photo(photo="https://te.legra.ph/file/f138d8467ba14b1b77cd2.jpg", caption=post_7)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/f138d8467ba14b1b77cd2.jpg", caption=post_9)
 # Define a function to handle the /start command
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
