@@ -59,16 +59,64 @@ VOTE_MARKUP = InlineKeyboardMarkup(
 async def start(bot, cmd: Message):
     mfg_id=cmd.id
     apx_id=-1001811950874
-    post_1 = await app.get_messages(apx_id, 3)
-    post_2 = await app.get_messages(apx_id, 4)
-    post_3 = await app.get_messages(apx_id, 5)
-    post_4 = await app.get_messages(apx_id, 6)
+    post_1 = f"""**Chats | Unban Appeal Guidelines**
+
+Users who wish to make an Unban Appeal for their AniWatch Account may go through these Guidelines.
+
+**This Guide Consists Of:**
+
+･❱ Crafting an Unban Appeal
+･❱ Valid Appeals
+･❱ Staff Contact
+･❱ Waiting Period
+･❱ Unban
+･❱ Respect Staff Judgement
+･❱ Important"""
+    
+    post_2 = f"""**1. Creating an unban appeal**
+
+__Users are to follow the said format while creating an unban Appeal. We do not accept appeals for mutes.__"""
+    post_3 = f"""**Appeal Format**
+
+**AniWatch Profile Link -**
+
+• Visit the Community Page > Myzone. Hold/Tap your username and copy link.
+
+**Date of Ban:**
+
+• Click the notification icon and enter the date stated in the notification.
+
+**Reason for Ban:**
+
+• The reason shall be stated in the Notification as well, please attach a screenshot of the notification with the appeal.
+
+**Appeal:**
+
+• Submit Valid Appeals, make sure your appeal is of meaning and follows the guidelines and the format.
+
+`Make sure to read through everything and provide the correct details stated in the embed below.`"""
+    post_4 = f"""**2. Valid Appeals**
+
+• __If your appeal is of no meaning, inappropriate or doesn't follow the appeal format, then it may get rejected on the spot by the Staff without any consideration.__
+
+• __To show an apologetic nature for the actions done and construct a statement that states: Such shall not be repeated in the future, and if seen repeated, the user agrees to be banned permanently.__
+
+• __The decision may change depending on the offenses done by the account. <b>Make sure you provide the <u>correct link to your AniWatch Profile</u>, and other details mentioned in the embed.</b>__
+
+• __Appeals for 24 hours, 48hours, or 72 hours Mute are not accepted.__
+
+• __Appeals for alternative accounts are not accepted.__
+
+• __Attempting to get your friend's punishment lifted will get you the same punishment, if they want to appeal they will have to follow these steps.__"""
     post_5 = await app.get_messages(apx_id, 7)
     post_6 = await app.get_messages(apx_id, 9)
     post_7 = await app.get_messages(apx_id, 10)
     post_8 = await app.get_messages(apx_id, 11)
     post_9 = await app.get_messages(apx_id, 12)
-    send1 = await cmd.reply_photo(post_1)
+    await cmd.reply_text(post_1)
+    await cmd.reply_text(post_2)
+    await cmd.reply_text(post_3)
+    await cmd.reply_text(post_4)
 # Define a function to handle the /start command
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
