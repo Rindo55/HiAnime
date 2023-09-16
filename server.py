@@ -54,6 +54,14 @@ VOTE_MARKUP = InlineKeyboardMarkup(
         ]
     ]
 )
+appeal_markup = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(text="📝MAKE AN APPEAL", url="https://t.me/AniWatchAppealBot?start=appeal")
+        ]
+    ]
+)
+
 
 @app.on_message(filters.command("send"))
 async def start(bot, cmd: Message):
@@ -92,7 +100,7 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 
 **Appeal:**
 
-• Submit Valid Appeals, make sure your appeal is of meaning and follows the guidelines and the format.
+• Submit Valid Appeals, make sure your appeal is of meaning and follows the guidelines and the format[.](https://te.legra.ph/file/ce8eb96d5e467ea8d15e3.jpg)
 
 `Make sure to read through everything and provide the correct details stated in the embed below.`"""
     post_4 = f"""**2. Valid Appeals**
@@ -138,9 +146,14 @@ Appeal stuff
 
 • __Thus you are strictly warned to not repeat any of a rulebreak after an unban as another appeal from the same user at another time is considered to be unauthentic and therefore nulled.__"""
     await cmd.reply_photo(photo="https://te.legra.ph/file/be7367d62fc78ca9b0668.jpg", caption=post_1)
-    await cmd.reply_text(post_2)
-    await cmd.reply_text(post_3)
-    await cmd.reply_text(post_4)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/42bbe503247135ca9b434.jpg", caption=post_2)
+    await cmd.reply_text(post_3, disable_web_page_preview=False)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/c02123b091b516a2f987d.jpg", caption=post_4)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/82bbcd2df79fb6d5889a9.jpg", caption=post_5, reply_markup=appeal_markup)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/105862c3095e0c186f941.jpg", caption=post_6)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/e48f84d2b164c25837e0b.jpg", caption=post_7)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/6bb208b15263d177e76e8.jpg", caption=post_8)
+    await cmd.reply_photo(photo="https://te.legra.ph/file/f138d8467ba14b1b77cd2.jpg", caption=post_7)
 # Define a function to handle the /start command
 @app.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd: Message):
