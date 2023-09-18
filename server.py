@@ -90,15 +90,27 @@ post_3 = f"""**Appeal Format**
 
 **Appeal:**
 
-• Submit Valid Appeals, make sure your appeal is of meaning and follows the guidelines and the format[.](https://te.legra.ph/file/ce8eb96d5e467ea8d15e3.jpg)
+• Submit [Valid Appeals](https://t.me/c/1944303479/31488/49241), make sure your appeal is of meaning and follows the guidelines and the format[.](https://te.legra.ph/file/ce8eb96d5e467ea8d15e3.jpg)
 
 **Make sure to read through everything and provide the correct details stated in the embed below**"""
-   
+post_4 = f"""**2. Valid Appeals**
+
+• __If your appeal is of no meaning, inappropriate or doesn't follow the appeal format, then it may get rejected on the spot by the Staff without any consideration.__
+
+• __To show an apologetic nature for the actions done and construct a statement that states: Such shall not be repeated in the future, and if seen repeated, the user agrees to be banned permanently.__
+
+• __The decision may change depending on the offenses done by the account. <b>Make sure you provide the <u>correct link to your AniWatch Profile</u>, and other details mentioned in [the embed](https://t.me/c/1944303479/31488/49242).</b>__
+
+• __Appeals for 24 hours, 48hours, or 72 hours Mute are not accepted.__
+
+• __Appeals for alternative accounts are not accepted.__
+
+• __Attempting to get your friend's punishment lifted will get you the same punishment, if they want to appeal they will have to follow these steps.__"""  
 @app.on_message(filters.command("edit"))
 async def start(bot, cmd: Message):
     
-    await app.edit_message_caption(-1001944303479, 49238, post_1)
     await app.edit_message_caption(-1001944303479, 49240, post_3)
+    await app.edit_message_caption(-1001944303479, 49241, post_4)
 @app.on_message(filters.command("send"))
 async def start(bot, cmd: Message):
     mfg_id=cmd.id
