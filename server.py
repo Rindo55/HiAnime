@@ -61,25 +61,48 @@ appeal_markup = InlineKeyboardMarkup(
         ]
     ]
 )
-
-
-@app.on_message(filters.command("send"))
-async def start(bot, cmd: Message):
-    mfg_id=cmd.id
-    apx_id=-1001811950874
-    post_1 = f"""**Chats | Unban Appeal Guidelines**
+post_1 = f"""**Chats | Unban Appeal Guidelines**
 
 Users who wish to make an Unban Appeal for their AniWatch Account may go through these Guidelines.
 
 **This Guide Consists Of:**
 
-･❱ Crafting an Unban Appeal
-･❱ Valid Appeals
-･❱ Staff Contact
-･❱ Waiting Period
-･❱ Unban
-･❱ Respect Staff Judgement
-･❱ Important"""
+･❱ [Crafting an Unban Appeal](https://t.me/c/1944303479/31488/49239)
+･❱ [Valid Appeals](https://t.me/c/1944303479/31488/49241)
+･❱ [Staff Contact](https://t.me/c/1944303479/31488/49242)
+･❱ [Waiting Period](https://t.me/c/1944303479/31488/49243)
+･❱ [Unban](https://t.me/c/1944303479/31488/49244)
+･❱ [Respect Staff Judgement](https://t.me/c/1944303479/31488/49245)
+･❱ [Important](https://t.me/c/1944303479/31488/49246)"""
+post_3 = f"""**Appeal Format**
+
+**AniWatch Profile Link -**
+
+• Visit the Community Page > Myzone. Hold/Tap your username and copy link.
+
+**Date of Ban:**
+
+• Click the notification icon and enter the date stated in the notification.
+
+**Reason for Ban:**
+
+• The reason shall be stated in the Notification as well, please attach a screenshot of the notification with the appeal.
+
+**Appeal:**
+
+• Submit Valid Appeals, make sure your appeal is of meaning and follows the guidelines and the format[.](https://te.legra.ph/file/ce8eb96d5e467ea8d15e3.jpg)
+
+**Make sure to read through everything and provide the correct details stated in the embed below**"""
+   
+@app.on_message(filters.command("edit"))
+async def start(bot, cmd: Message):
+    
+    await app.edit_message_caption(-1001944303479, 49238, post_1)
+    await app.edit_message_caption(-1001944303479, 49240, post_3)
+@app.on_message(filters.command("send"))
+async def start(bot, cmd: Message):
+    mfg_id=cmd.id
+    apx_id=-1001811950874
     
     post_2 = f"""**1. Creating an unban appeal**
 
