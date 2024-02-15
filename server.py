@@ -254,7 +254,7 @@ async def start(bot, cmd: Message):
         user_id = cmd.from_user.id
         user_states[user_id] = 'waiting_link'
         user_messages[user_id] = []  # Initialize an empty list for user messages
-        await app.send_message(user_id, "State your **AniWatch profile link.**")
+        await app.send_message(user_id, "State your **AniWatch profile link**.\n\n**(How to get your profile link?**\n__Visit the Community Page > Myzone. Hold/Tap your username and copy link__)")
 
 # Define a function to handle user messages
 @app.on_message(filters.text)
