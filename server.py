@@ -261,7 +261,7 @@ async def start(bot, cmd: Message):
 async def handle_message(bot, update):
     user_id = update.from_user.id
     mention = update.from_user.mention()
-    un = f"@{update.from_user.username}"
+    un = f" @{update.from_user.username}"
     if user_id in user_states:
         state = user_states[user_id]
         if state == 'send_link':
@@ -298,7 +298,7 @@ async def handle_message(bot, update):
                 await app.send_message(user_id, "Your appeal has been received and is now under review.")
                 combined_message = "\n".join(user_messages[user_id])  # Combine user messages
                 ch_id = -1001894461368
-                apl = await app.send_message(ch_id, text=f"<b>User:</b> {mention}\n<b>User ID:</b> <code>{user_id}</code>\n<b>Username:</b>{un}\n━━━━━━━━━━━━━━━━━━━━━━\n<blockquote>{combined_message}</blockquote>\n━━━━━━━━━━━━━━━━━━━━━━\n<b>Status</b>: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
+                apl = await app.send_message(ch_id, text=f"<b>User:</b> {mention}\n<b>User ID:</b> <code>{user_id}</code>\n<b>Username:</b>{un}\n━━━━━━━━━━━━━━━━━━━━━━\n{combined_message}\n━━━━━━━━━━━━━━━━━━━━━━\n<b>Status</b>: ⚠️ | To be reviewed", reply_markup=VOTE_MARKUP, disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
                 await apl.reply_text("💬**REMARK**")
                 await asyncio.sleep(2)
                 await app.send_sticker(ch_id,"CAACAgUAAxkBAAEU_9FkRrLoli952oqIMVFPftW12xYLRwACGgADQ3PJEsT69_t2KrvBLwQ")
