@@ -122,7 +122,7 @@ async def start(bot, cmd: Message):
 __Users are to follow the said format while creating an unban Appeal. We do not accept appeals for mutes.__"""
     post_3 = f"""**Appeal Format**
 
-**AniWatch Profile Link -**
+**HiAnime Profile Link -**
 
 • Visit the Community Page > Myzone. Hold/Tap your username and copy link.
 
@@ -145,7 +145,7 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 
 • __To show an apologetic nature for the actions done and construct a statement that states: Such shall not be repeated in the future, and if seen repeated, the user agrees to be banned permanently.__
 
-• __The decision may change depending on the offenses done by the account. <b>Make sure you provide the <u>correct link to your AniWatch Profile</u>, and other details mentioned in the embed.</b>__
+• __The decision may change depending on the offenses done by the account. <b>Make sure you provide the <u>correct link to your HiAnime Profile</u>, and other details mentioned in the embed.</b>__
 
 • __Appeals for 24 hours, 48hours, or 72 hours Mute are not accepted.__
 
@@ -156,12 +156,12 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 
 • __Once you are prepared to create an appeal, you may react to the <b><u>Button</b></u> connected to this embed.__
 
-• __The <b>@AniWatchAppealBot</b> bot shall DM you, you may now select the <u>APPEAL</u> form placed in the bot embed and <u>follow the instructions</u> that has been stated throughout the procedures accordingly.__
+• __The <b>@HiAnimeAppealBot</b> bot shall DM you, you may now select the <u>APPEAL</u> form placed in the bot embed and <u>follow the instructions</u> that has been stated throughout the procedures accordingly.__
 
 • __<b>DO NOT spam or conduct any similar actions using the appeal system, it may result in your appeal being rejected without even being considered and be result to moderative actions at certain cases.</b>__"""
     post_6 = f"""**4. Waiting period**
 
-• __You are to await the judgment for the least of <b><u>7 Days</b></u> in respect to the reviewal process by the Community Mods & Community Admins. Once you have submitted the Appeal, @AniWatchAppealBot will notify you whether if the Appeal is accepted or rejected.__
+• __You are to await the judgment for the least of <b><u>7 Days</b></u> in respect to the reviewal process by the Community Mods & Community Admins. Once you have submitted the Appeal, @HiAnimeAppealBot will notify you whether if the Appeal is accepted or rejected.__
 
 • __In the event that you have not received a response from the designated appeal field with which you have created the appeal, it is advisable to initiate a "Direct Message" with a Community Mod to follow up. However, if you continue to encounter a lack of response, it is probable that your appeal has been declined.__"""
     post_7 = f"""
@@ -175,7 +175,7 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 • __If the user is to not accept the judgment and seen requesting constantly for an unban, before the time allocated, the punishment shall be extended to a much prolonged period of time.__"""
     post_9 = f"""**⚠️ Important ⚠️**
 
-**This is a public warning to everyone wanting to Appeal their ban on** `AniWatch`. Once you make an appeal, you agree with the `AniWatch Community Guidelines`.
+**This is a public warning to everyone wanting to Appeal their ban on** `HiAnime`. Once you make an appeal, you agree with the `HiAnime Community Guidelines`.
 
 • __Do note that appeals in an attempt at an unban for the second time due to the repeating of a major rulebreak after an initial unban shall not in any case be accepted or considered.__
 
