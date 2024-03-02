@@ -17,7 +17,7 @@ import requests
 from html_telegraph_poster import TelegraphPoster
 api_id = 3845818
 api_hash = "95937bcf6bc0938f263fc7ad96959c6d"
-bot_token = "6428443845:AAF9usGZRMRPPMuOfcjClNypt3N_p2_gUZc"
+bot_token = "7005003917:AAG1GwMAm4uFxMOzvesg1vTWRjVX0hHKStM"
 app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 user_states = {}
 async def timeout_message(chat_id):
@@ -33,7 +33,7 @@ user_messages = {}
 START_MARKUP = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="Create an appeal", url="https://t.me/aniwatchappealbot?start=appeal"),
+            InlineKeyboardButton(text="Create an appeal", url="https://t.me/hianimeappealbot?start=appeal"),
         ]
     ]
 ) 
@@ -57,13 +57,13 @@ VOTE_MARKUP = InlineKeyboardMarkup(
 appeal_markup = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="📝MAKE AN APPEAL", url="https://t.me/AniWatchAppealBot?start=appeal")
+            InlineKeyboardButton(text="📝MAKE AN APPEAL", url="https://t.me/hianimeAppealBot?start=appeal")
         ]
     ]
 )
 post_1 = f"""**Chats | Unban Appeal Guidelines**
 
-Users who wish to make an Unban Appeal for their AniWatch Account may go through these Guidelines.
+Users who wish to make an Unban Appeal for their HiAnime Account may go through these Guidelines.
 
 **This Guide Consists Of:**
 
@@ -76,7 +76,7 @@ Users who wish to make an Unban Appeal for their AniWatch Account may go through
 ･❱ [Important](https://t.me/c/1944303479/31488/49246)"""
 post_3 = f"""**Appeal Format**
 
-**AniWatch Profile Link -**
+**HiAnime Profile Link -**
 
 • Visit the Community Page > Myzone. Hold/Tap your username and copy link.
 
@@ -241,7 +241,7 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 async def start(bot, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     if usr_cmd == "/start":
-        await cmd.reply_text("**Hey! I am an appeal bot serving for aniwatch.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
+        await cmd.reply_text("**Hey! I am an appeal bot serving for HiAnime.to. Click the below button & follow the instructions to make an appeal for your banned account.**", reply_markup=START_MARKUP)
     elif cmd.text.split("_", 1)[0] == "/start user":
         user_id = cmd.from_user.id
         user_states[user_id] = 'send_link'
@@ -254,7 +254,7 @@ async def start(bot, cmd: Message):
         user_id = cmd.from_user.id
         user_states[user_id] = 'waiting_link'
         user_messages[user_id] = []  # Initialize an empty list for user messages
-        await app.send_message(user_id, "State your **AniWatch profile link**.\n\n**(How to get your profile link?**\n__Visit the Community Page > Myzone. Hold/Tap your username and copy link__)")
+        await app.send_message(user_id, "State your **HiAnime profile link**.\n\n**(How to get your profile link?**\n__Visit the Community Page > Myzone. Hold/Tap your username and copy link__)")
 
 # Define a function to handle user messages
 @app.on_message(filters.private & filters.text)
@@ -277,7 +277,7 @@ async def handle_message(bot, update):
             )
         if state == 'waiting_link':
             if "http" in update.text:
-                user_messages[user_id].append(f"<b>AniWatch Profile Link:</b> {update.text}")
+                user_messages[user_id].append(f"<b>HiAnime Profile Link:</b> {update.text}")
                 user_states[user_id] = 'waiting_punishment_date'
                 await app.send_message(user_id, text="Mention the <b>date of your punishment.</b> \n\n(Note: Number of characters for this query must **not exceed** the limit of **15**)")
             else:
