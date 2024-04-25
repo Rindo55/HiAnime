@@ -67,13 +67,13 @@ Users who wish to make an Unban Appeal for their HiAnime Account may go through 
 
 **This Guide Consists Of:**
 
-･❱ [Crafting an Unban Appeal](https://t.me/c/1944303479/31488/49239)
-･❱ [Valid Appeals](https://t.me/c/1944303479/31488/49241)
-･❱ [Staff Contact](https://t.me/c/1944303479/31488/49242)
-･❱ [Waiting Period](https://t.me/c/1944303479/31488/49243)
-･❱ [Unban](https://t.me/c/1944303479/31488/49244)
-･❱ [Respect Staff Judgement](https://t.me/c/1944303479/31488/49245)
-･❱ [Important](https://t.me/c/1944303479/31488/49246)"""
+･❱ [Crafting an Unban Appeal](https://t.me/c/1944303479/31488/74249)
+･❱ [Valid Appeals](https://t.me/c/1944303479/31488/74250)
+･❱ [Staff Contact](https://t.me/c/1944303479/31488/74251)
+･❱ [Waiting Period](https://t.me/c/1944303479/31488/74252)
+･❱ [Unban](https://t.me/c/1944303479/31488/74253)
+･❱ [Respect Staff Judgement](https://t.me/c/1944303479/31488/74254)
+･❱ [Important](https://t.me/c/1944303479/31488/74255)"""
 post_3 = f"""**Appeal Format**
 
 **HiAnime Profile Link -**
