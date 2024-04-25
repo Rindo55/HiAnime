@@ -68,12 +68,12 @@ Users who wish to make an Unban Appeal for their HiAnime Account may go through 
 **This Guide Consists Of:**
 
 ･❱ [Crafting an Unban Appeal](https://t.me/c/1944303479/31488/74249)
-･❱ [Valid Appeals](https://t.me/c/1944303479/31488/74250)
-･❱ [Staff Contact](https://t.me/c/1944303479/31488/74251)
-･❱ [Waiting Period](https://t.me/c/1944303479/31488/74252)
-･❱ [Unban](https://t.me/c/1944303479/31488/74253)
-･❱ [Respect Staff Judgement](https://t.me/c/1944303479/31488/74254)
-･❱ [Important](https://t.me/c/1944303479/31488/74255)"""
+･❱ [Valid Appeals](https://t.me/c/1944303479/31488/74251)
+･❱ [Staff Contact](https://t.me/c/1944303479/31488/74252)
+･❱ [Waiting Period](https://t.me/c/1944303479/31488/74253)
+･❱ [Unban](https://t.me/c/1944303479/31488/74254)
+･❱ [Respect Staff Judgement](https://t.me/c/1944303479/31488/74255)
+･❱ [Important](https://t.me/c/1944303479/31488/74256)"""
 post_3 = f"""**Appeal Format**
 
 **HiAnime Profile Link -**
@@ -109,8 +109,7 @@ post_4 = f"""**2. Valid Appeals**
 @app.on_message(filters.command("edit"))
 async def start(bot, cmd: Message):
     
-    await app.edit_message_caption(-1001944303479, 49240, post_3)
-    await app.edit_message_caption(-1001944303479, 49241, post_4)
+    await app.edit_message_caption(-1001944303479, 74251, post_1)
 @app.on_message(filters.command("send"))
 async def start(bot, cmd: Message):
     mfg_id=cmd.id
