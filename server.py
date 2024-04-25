@@ -22,11 +22,11 @@ app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 user_states = {}
 async def timeout_message(chat_id):
     await asyncio.sleep(300)
-    await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
+    await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/hianimeappealbot?start=appeal).")
 
 async def timeoutz_message(chat_id):
     await asyncio.sleep(500)
-    await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/aniwatchappealbot?start=appeal).")
+    await app.send_message(chat_id, "Beep Boop! 5 minutes up, no response has been received. Your appeal has timed out. If you'd like to submit the appeal, please click [here](https://t.me/hianimeappealbot?start=appeal).")
 user_states = {}
 user_messages = {}
 
@@ -136,7 +136,7 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 
 **Appeal:**
 
-• Submit Valid Appeals, make sure your appeal is of meaning and follows the guidelines and the format[.](https://te.legra.ph/file/ce8eb96d5e467ea8d15e3.jpg)
+• Submit Valid Appeals, make sure your appeal is of meaning and follows the guidelines and the format[.](https://i.ibb.co/Vxn8Cfm/Appeal-Latest-1.jpg)
 
 `Make sure to read through everything and provide the correct details stated in the embed below.`"""
     post_4 = f"""**2. Valid Appeals**
@@ -182,13 +182,13 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
 • __Thus you are strictly warned to not repeat any of a rulebreak after an unban as another appeal from the same user at another time is considered to be unauthentic and therefore nulled.__"""
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/be7367d62fc78ca9b0668.jpg",
+        photo="https://i.ibb.co/LrcSHvk/Ban-Appeal-Guidelines-1.jpg",
         caption = post_1,
         reply_to_message_id=rep_id
     )
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/42bbe503247135ca9b434.jpg",
+        photo="https://i.ibb.co/vh05878/Crafting-An-Appeal-1.jpg",
         caption = post_2,
         reply_to_message_id=rep_id
     )
@@ -200,38 +200,38 @@ __Users are to follow the said format while creating an unban Appeal. We do not 
     )
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/c02123b091b516a2f987d.jpg",
+        photo="https://i.ibb.co/8KjnK9n/Valid-Appeals-1.jpg",
         caption = post_4,
         reply_to_message_id=rep_id
     )
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/82bbcd2df79fb6d5889a9.jpg",
+        photo="https://i.ibb.co/xh8zXnf/Contacting-Our-Staff-1.jpg",
         caption = post_5,
         reply_markup=appeal_markup,
         reply_to_message_id=rep_id,
     )
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/105862c3095e0c186f941.jpg",
+        photo="https://i.ibb.co/5kJPfsw/Waiting-Review-Period-1.jpg",
         caption = post_6,
         reply_to_message_id=rep_id
     )
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/e48f84d2b164c25837e0b.jpg",
+        photo="https://i.ibb.co/pd3Tw9w/From-Exile-To-Return-1.jpg",
         caption = post_7,
         reply_to_message_id=rep_id
     )
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/6bb208b15263d177e76e8.jpg",
+        photo="https://i.ibb.co/j64xNnV/Value-Staff-Judgement-1.jpg",
         caption = post_8,
         reply_to_message_id=rep_id
     )
     await app.send_photo(
         chat_id=ghid,
-        photo="https://te.legra.ph/file/f138d8467ba14b1b77cd2.jpg",
+        photo="https://i.ibb.co/9gyfN2B/Important-Notice-1.jpg",
         caption = post_9,
         reply_to_message_id=rep_id
     )
@@ -398,7 +398,7 @@ async def votes_(_, query: CallbackQuery):
         elif vote == 6:
             f = "(✅)"
             buttons = get_vote_buttons(a, b, c, d , e, f)
-            await query.answer(url=f"t.me/AniWatchAppealBot?start=user_{usid}")
+            await query.answer(url=f"t.me/hianimeAppealBot?start=user_{usid}")
             await query.answer()
             await query.message.edit_reply_markup(reply_markup=buttons)
             denx =  lmx.replace("⚠️ | To be reviewed", f"✅ | Appeal accepted by {men} | manually reviewed") 
