@@ -108,8 +108,8 @@ post_4 = f"""**2. Valid Appeals**
 • __Attempting to get your friend's punishment lifted will get you the same punishment, if they want to appeal they will have to follow these steps.__"""  
 @app.on_message(filters.command("edit"))
 async def start(bot, cmd: Message):
-    
-    await app.edit_message_caption(-1001944303479, 74251, post_1)
+    await app.edit_message_caption(-1001944303479, 74248, post_1)
+    await app.edit_message_caption(-1001944303479, 74251, post_4)
 @app.on_message(filters.command("send"))
 async def start(bot, cmd: Message):
     mfg_id=cmd.id
